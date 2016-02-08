@@ -1,0 +1,42 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="MasterPage.master.cs" Inherits="MasterPage" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body style="height: 64px; width: 938px; margin-top: 0px; margin-left: 5px;">
+    <form id="form1" runat="server">
+    <div style="margin-left: 0px; height: 64px;">
+
+        <br />
+        <br />
+        <div style="margin-left: 393px; height: 17px; margin-top: 10px;margin-bottom:0px;">
+
+            <asp:ImageButton ID="Main_ImgBtn" runat="server" OnClick="Main_ImgBtn_Click" />
+&nbsp;<asp:ImageButton ID="SignIn_ImgBtn" runat="server" />
+&nbsp;<asp:ImageButton ID="Activity_ImgBtn" runat="server" />
+&nbsp;<asp:ImageButton ID="FileDown_ImgBtn" runat="server" />
+&nbsp;<asp:ImageButton ID="BBS_ImgBtn" runat="server" />
+
+        </div>
+
+        <br />
+
+    </div>
+        <br />
+        <asp:ContentPlaceHolder id="Main_ContentPlaceHolder" runat="server">
+        
+            <p style="width: 650px; height: 332px; margin-left: 150px">
+                &nbsp;</p>
+        
+        </asp:ContentPlaceHolder>
+    <div>
+    </div>
+    </form>
+</body>
+</html>

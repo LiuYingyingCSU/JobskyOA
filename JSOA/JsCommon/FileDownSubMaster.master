@@ -1,0 +1,17 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FileDownSubMaster.master.cs" Inherits="JsCommon_FileDownSubMaster" %>
+
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
+    <div style="width: 650px; margin-left: 150px; margin-top: 0px">
+        文件下载子母版页：程序组、美工组、网络组、办公室
+    </div>
+    <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">
+
+        <p style="height: 324px; width: 650px; margin-left: 150px; margin-top: 25px">
+
+        </p>
+
+    </asp:ContentPlaceHolder>
+    
+</asp:Content>

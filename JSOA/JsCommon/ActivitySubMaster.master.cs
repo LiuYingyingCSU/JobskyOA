@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JsCommon_JsCommonMain : System.Web.UI.Page
+public partial class JsCommon_SubMaster_Activity : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {

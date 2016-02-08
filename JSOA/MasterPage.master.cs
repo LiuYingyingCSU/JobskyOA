@@ -5,10 +5,14 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class JsCommon_JsCommonMain : System.Web.UI.Page
+public partial class MasterPage : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
 
+    }
+    protected void Main_ImgBtn_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/JsCommonMain.aspx");
     }
 }
