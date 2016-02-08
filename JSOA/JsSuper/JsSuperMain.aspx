@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="TestSqlCon.aspx.cs" Inherits="TestSqlCon" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="JsSuperMain.aspx.cs" Inherits="JsSuper_JsSuperMain" %>
 
 <!DOCTYPE html>
 
@@ -15,5 +15,3 @@
     </form>
 </body>
 </html>
-
-
