@@ -5,6 +5,12 @@
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
     <div style="width: 650px; margin-left: 150px; margin-top: 0px">
         文件下载子母版页：程序组、美工组、网络组、办公室
+     
+        <br />
+        <asp:ImageButton ID="ImgbtnProgram" runat="server" OnClick="ImgbtnProgram_Click" />
+        <asp:ImageButton ID="ImgbtnArt" runat="server" OnClick="ImgbtnArt_Click" />
+        <asp:ImageButton ID="ImgbtnNet" runat="server" OnClick="ImgbtnNet_Click" />
+        <asp:ImageButton ID="ImgbtnOffice" runat="server" OnClick="ImgbtnOffice_Click" style="width: 14px" />
     </div>
     <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">
 

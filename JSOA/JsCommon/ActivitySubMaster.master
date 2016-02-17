@@ -4,6 +4,12 @@
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
     <div style="width: 650px; margin-left: 150px; margin-top: 0px">
         动态子页面：日志、新闻、公告、留言  选择标签
+     
+        <br />
+        <asp:ImageButton ID="ImgbtnDiary" runat="server" OnClick="ImgbtnDiary_Click" />
+        <asp:ImageButton ID="ImgbtnNews" runat="server" OnClick="ImgbtnNews_Click" />
+        <asp:ImageButton ID="ImgbtnNotice" runat="server" OnClick="ImgbtnNotice_Click" />
+        <asp:ImageButton ID="ImgbtnMessage" runat="server" OnClick="ImgbtnMessage_Click" />
     </div>
     <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">
 
