@@ -1,7 +1,6 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JsCommon/FileDownSubMaster.master" AutoEventWireup="true" CodeFile="FileNet.aspx.cs" Inherits="JsCommon_Net" %>
 
+<%@ Register TagName="fileRepeater" TagPrefix="uc1"  Src="~/JsCommon/fileRepeater.ascx"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="SubContent_ContentPlaceHolder" Runat="Server">
-    <p>
-    网络组</p>
-</asp:Content>
-
+    <uc1:fileRepeater ID="fileRpt" runat="server" />
+    </asp:Content>
