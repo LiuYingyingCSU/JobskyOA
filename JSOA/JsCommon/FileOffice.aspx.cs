@@ -9,6 +9,7 @@ public partial class JsCommon_FileOffice : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        this.Master.btnOff.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
         if (!IsPostBack)
         {
             if (Session["jobskyerID"] == null)

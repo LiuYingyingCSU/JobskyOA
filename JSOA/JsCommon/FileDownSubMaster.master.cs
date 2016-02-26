@@ -9,11 +9,59 @@ public partial class JsCommon_FileDownSubMaster : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(!IsPostBack)
+        {
+            this.Master.btnFile.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+        }
         if(Session["jobskyerID"]==null)
         {
             Response.Redirect("~/JsCommon/Login.aspx");
         }
         
+    }
+    public ImageButton btnPro
+    {
+        get
+        {
+            return ImgbtnProgram;
+        }
+        set
+        {
+            ImgbtnProgram = value;
+        }
+    }
+    public ImageButton btnArt
+    {
+        get
+        {
+            return ImgbtnArt;
+        }
+        set
+        {
+            ImgbtnArt = value;
+        }
+    }
+    public ImageButton btnNet
+    {
+        get
+        {
+            return ImgbtnNet;
+        }
+        set
+        {
+            ImgbtnNet = value;
+        }
+    }
+    public ImageButton btnOff
+    {
+        get
+        {
+            return ImgbtnOffice;
+        }
+        set
+        {
+            ImgbtnOffice = value;
+        }
     }
     protected void ImgbtnProgram_Click(object sender, ImageClickEventArgs e)
     {

@@ -17,8 +17,65 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         //Response.Write(ipAddress);
     }
+    //用于内容页访问母版页的属性
+    public ImageButton btnMain
+    {
+        get
+        {
+            return Main_ImgBtn;
+        }
+        set
+        {
+            Main_ImgBtn = value;
+        }
+    }
+    public ImageButton btnSign
+    {
+        get
+        {
+            return SignIn_ImgBtn;
+        }
+        set
+        {
+            SignIn_ImgBtn = value;
+        }
+    }
+    public ImageButton btnFile
+    {
+        get
+        {
+            return FileDown_ImgBtn;
+        }
+        set
+        {
+            FileDown_ImgBtn = value;
+        }
+    }
+    public ImageButton btnActivity
+    {
+        get
+        {
+            return Activity_ImgBtn;
+        }
+        set
+        {
+            Activity_ImgBtn = value;
+        }
+    }
+    public ImageButton btnBBS
+    {
+        get
+        {
+            return BBS_ImgBtn;
+        }
+        set
+        {
+            BBS_ImgBtn = value;
+        }
+    }
     protected void Main_ImgBtn_Click(object sender, ImageClickEventArgs e)
     {
+        Main_ImgBtn.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
         Response.Redirect("~/JsCommon/JsCommonMain.aspx");
     }
     protected void SignIn_ImgBtn_Click(object sender, ImageClickEventArgs e)
