@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ActivitySubMaster.master.cs" Inherits="JsCommon_ActivitySubMaster" MasterPageFile="~/MasterPage.master"%>
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ActivitySubMaster.master.cs" Inherits="JsCommon_SubMaster_Activity" MasterPageFile="~/MasterPage.master"%>
 
 
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
@@ -10,7 +10,6 @@
         <p style="height: 324px; width: 650px; margin-left: 150px; margin-top: 25px">
 
         </p>
-
     </asp:ContentPlaceHolder>
     
 </asp:Content>

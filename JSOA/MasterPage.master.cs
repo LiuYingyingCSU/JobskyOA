@@ -13,6 +13,11 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
     protected void Main_ImgBtn_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/JsCommonMain.aspx");
+        Response.Redirect("~/JsCommon/JsCommonMain.aspx");
+    }
+
+    protected void Game_ImgBtn_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("~/Game/2048custom/2048Game.aspx");
     }
 }
