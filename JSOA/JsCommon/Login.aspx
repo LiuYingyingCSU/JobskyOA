@@ -6,50 +6,55 @@
 <head runat="server">
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
+    <link href="../CSS/Login.css" rel="stylesheet" type="text/css" />
+    <style type="text/css" >   
+    </style>
 </head>
 <body>
     <form id="form1" runat="server">
+        <div class="login">
+            
         <asp:Login ID="Login1" runat="server">
             <LayoutTemplate>
-                <table cellpadding="1" cellspacing="0" style="border-collapse:collapse;">
+                <table  style="border-collapse:collapse;">
                     <tr>
-                        <td>
-                            <table cellpadding="0">
-                                <tr>
-                                    <td align="center" colspan="2">登录</td>
-                                </tr>
-                                <tr>
-                                    <td align="right">
+                        <td  >
+                            <table >
+                                <div class="login_top">
+                                    <p>登录</p>
+                                </div>
+                                <tr class="userid">
+                                    <td >
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">学号:</asp:Label>
                                     </td>
                                     <td>
                                         <asp:TextBox ID="UserName" runat="server"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="必须填写“用户名”。" ToolTip="必须填写“用户名”。" ValidationGroup="Login1">*</asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="UserNameRequired" runat="server" ControlToValidate="UserName" ErrorMessage="必须填写“用户名”。" ToolTip="必须填写“用户名”。" ValidationGroup="Login1">用户名不能为空</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
-                                <tr>
-                                    <td align="right">
+                                <tr class="userid">
+                                    <td  >
                                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">密码:</asp:Label>
                                     </td>
-                                    <td>
+                                    <td  >
                                         <asp:TextBox ID="Password" runat="server" TextMode="Password"></asp:TextBox>
-                                        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="必须填写“密码”。" ToolTip="必须填写“密码”。" ValidationGroup="Login1">*</asp:RequiredFieldValidator>
+                                        <asp:RequiredFieldValidator ID="PasswordRequired" runat="server" ControlToValidate="Password" ErrorMessage="必须填写“密码”。" ToolTip="必须填写“密码”。" ValidationGroup="Login1">密码不能为空</asp:RequiredFieldValidator>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td colspan="2">
+                                    <td colspan="2" >
                                         <asp:CheckBox ID="RememberMe" runat="server" Text="下次记住我。" />
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="center" colspan="2" style="color:Red;">
-                                        <asp:Literal ID="FailureText" runat="server" EnableViewState="False" Text="登陆失败"></asp:Literal>
+                                    <td  colspan="2" style="color:Red;">
+                                        <asp:Literal ID="FailureText" runat="server" EnableViewState="False" Text="用户名或密码错误"></asp:Literal>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td align="right" colspan="2">
-                                        <asp:Button ID="btnLogin" runat="server" CommandName="Login" OnClick="btnLogin_Click1" Text="登录" ValidationGroup="Login1" />
-                                    </td>
+                                       <td> 
+                                           <asp:ImageButton ID="btnLogin" runat="server" CommandName ="Login" OnClick="btnLogin_Click1" ValidationGroup="Login1" />
+                                       </td>
                                 </tr>
                             </table>
                         </td>
@@ -57,6 +62,7 @@
                 </table>
             </LayoutTemplate>
         </asp:Login>
+            </div>
     </form>
 </body>
 </html>

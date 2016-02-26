@@ -1,23 +1,18 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FileDownSubMaster.master.cs" Inherits="JsCommon_FileDownSubMaster" %>
+<%@ Register TagName="fileRepeater" TagPrefix="uc1"  Src="~/JsCommon/fileRepeater.ascx"%>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
-    <div style="width: 650px; margin-left: 150px; margin-top: 0px">
-        文件下载子母版页：程序组、美工组、网络组、办公室
-     
-        <br />
+    <div class="FD_head">
         <asp:ImageButton ID="ImgbtnProgram" runat="server" OnClick="ImgbtnProgram_Click" />
         <asp:ImageButton ID="ImgbtnArt" runat="server" OnClick="ImgbtnArt_Click" />
         <asp:ImageButton ID="ImgbtnNet" runat="server" OnClick="ImgbtnNet_Click" />
         <asp:ImageButton ID="ImgbtnOffice" runat="server" OnClick="ImgbtnOffice_Click" style="width: 14px" />
     </div>
+    <div class="FD_content">
     <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">
-
-        <p style="height: 324px; width: 650px; margin-left: 150px; margin-top: 25px">
-
-        </p>
-
+        <uc1:fileRepeater ID="fileRpt" runat="server" />
     </asp:ContentPlaceHolder>
-    
+    </div>
 </asp:Content>

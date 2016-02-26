@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using System.Data.SqlClient;
+using System.Web.UI.HtmlControls;
 
 public partial class JsCommon_JsCommonMain : System.Web.UI.Page
 {
@@ -24,17 +25,7 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             try
             {
                 SqlDataReader dr1 = db.reDr("select jobAcademy,jobPosition,jobCount from jobskyer where jobName='" + jobName + "'");
-                //积分排名如何实现
-                //SqlDataReader dr2 = db.reDr("SELECT jobName,jobCount from JOBSKYER order by jobCount DESC");
                 dr1.Read();
-                //dr2.Read();
-               //while(dr2.HasRows)
-                //{使用dr2,进入浏览器时，内存迅速增加，异常提示没有足够的内存空间
-                    //int i=0;
-                    //int j=0;
-                    //Response.Write("<script>alert('"+dr2.GetValue(0)+"')</script>");
-                    //if()
-                //}
                 lblName.Text = HttpContext.Current.User.Identity.Name;
                 if (dr1.HasRows)
                 {
@@ -65,9 +56,9 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
         SqlDataReader dr2 = db.reDr("SELECT imageAddress FROM JOBSKYER WHERE jobName='" +jobName + "'");
         dr2.Read();
         imgUrl = dr2.GetValue(0).ToString().Trim();
-        Response.Write(imgUrl);
         ImgbtnProfile.ImageUrl = imgUrl;
         dr2.Close();
     }
+    
    
 }
