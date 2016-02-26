@@ -11,4 +11,9 @@ public partial class JsCommon_News : System.Web.UI.Page
     {
 
     }
+
+    protected void Duty_Count_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("/JsManager/DutyCount.aspx");
+    }
 }

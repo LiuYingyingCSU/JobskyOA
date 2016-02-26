@@ -12,12 +12,12 @@ using System.Security.Cryptography;
 /// </summary>
 public class DB
 {
-	public DB()
-	{
-		//
-		// TODO: 在此处添加构造函数逻辑
-		//
-	}
+    public DB()
+    {
+        //
+        // TODO: 在此处添加构造函数逻辑
+        //
+    }
     /// <summary>
     /// 连接数据库
     /// </summary>
@@ -36,13 +36,13 @@ public class DB
     {
         SqlConnection scon = GetCon();
         scon.Open();
-        SqlCommand scmd = new SqlCommand(cmdstr,scon);
+        SqlCommand scmd = new SqlCommand(cmdstr, scon);
         try
         {
             scmd.ExecuteNonQuery();        //执行SQL语句，并返回受影响的行数
             return 1;                      //成功返回1
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             return 0;                      //失败返回0
         }

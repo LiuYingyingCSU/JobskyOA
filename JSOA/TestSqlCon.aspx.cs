@@ -17,11 +17,11 @@ public partial class TestSqlCon : System.Web.UI.Page
         scon.Open();
         if (scon.State == ConnectionState.Open)
         {
-            Response.Write("数据库连接成功！");
+            Response.Write("<script>alert('数据库连接成功！');location.href='JsCommon/Login.aspx';</script>");
         }
         else
         {
-            Response.Write("数据库连接失败！");
+            Response.Write("<script>alert('数据库连接失败！');location.href='JsCommon/Login.aspx';</script>");
         }
         scon.Close();
     }

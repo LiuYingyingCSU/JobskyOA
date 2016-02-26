@@ -1,4 +1,4 @@
-﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ActivitySubMaster.master.cs" Inherits="JsCommon_ActivitySubMaster" MasterPageFile="~/MasterPage.master"%>
+<%@ Master Language="C#" AutoEventWireup="true" CodeFile="ActivitySubMaster.master.cs" Inherits="JsCommon_ActivitySubMaster" MasterPageFile="~/MasterPage.master"%>
 <%@ MasterType VirtualPath="~/MasterPage.master" %>
 
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
@@ -10,6 +10,7 @@
         <asp:ImageButton ID="ImgbtnMessage" runat="server" OnClick="ImgbtnMessage_Click" />
     </div>
     <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">
+
     </asp:ContentPlaceHolder>
     
 </asp:Content>

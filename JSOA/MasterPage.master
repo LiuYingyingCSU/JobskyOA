@@ -8,10 +8,12 @@
     <title></title>
     <link href="CSS/MasterPage.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
+
     </asp:ContentPlaceHolder>
 </head>
 <body >
     <form id="form1" runat="server">
+
     <div class="bar_top">
         <div class="top_bottom">
             <asp:ImageButton ID="Main_ImgBtn" runat="server" OnClick="Main_ImgBtn_Click" Height="60px" />
@@ -21,8 +23,10 @@
             &nbsp;<asp:ImageButton ID="BBS_ImgBtn" runat="server" OnClick="BBS_ImgBtn_Click" />
        &nbsp;
             <asp:ImageButton ID="ImgbtnLogout" runat="server" OnClick="ImgbtnLogout_Click" />
+
         </div>
     </div>
+
         
         <asp:ContentPlaceHolder id="Main_ContentPlaceHolder" runat="server">       
         </asp:ContentPlaceHolder>

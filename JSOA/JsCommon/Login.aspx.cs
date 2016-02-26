@@ -21,8 +21,10 @@ public partial class JsCommon_Login : System.Web.UI.Page
 
         }
     }
+
     //登录按钮
     protected void btnLogin_Click1(object sender, ImageClickEventArgs e)
+
     {
         lblFailText.Visible = false;
         if (String.IsNullOrEmpty(UserName.Text))
@@ -53,8 +55,10 @@ public partial class JsCommon_Login : System.Web.UI.Page
             string passWord = this.Password.Text.Trim();
             try
             {
+
                 DataTable dt = db.reDt("select jobskyerID,password,jobRole,jobName from JOBSKYER");
                 for (int i = 0; i < dt.Rows.Count; i++)
+
                 {
                     if (dt.Rows[i]["jobskyerID"].ToString() == jobskyerID && dt.Rows[i]["password"].ToString() == passWord)
                     {
