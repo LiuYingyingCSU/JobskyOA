@@ -1,6 +1,6 @@
 ﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FileDownSubMaster.master.cs" Inherits="JsCommon_FileDownSubMaster" %>
 <%@ Register TagName="fileRepeater" TagPrefix="uc1"  Src="~/JsCommon/fileRepeater.ascx"%>
-
+<%@ MasterType VirtualPath="~/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">

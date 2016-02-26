@@ -13,19 +13,19 @@
         }
 .login_top
         {
-            width:100%;
+            width:72%;
             height:30px;
             line-height:30px;
             font-size:20px;
             border-top-right-radius:10px;
             border-top-left-radius:10px;
             text-align:center;
-            background-color:blue;
+            background-color:antiquewhite;
             margin-left:1px;
         }
 .userid
         {
             width:100%;
             height:30px;
-            background-color:blue;
+            
         }

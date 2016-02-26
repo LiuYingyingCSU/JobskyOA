@@ -9,6 +9,10 @@ public partial class JsCommon_ActivitySubMaster : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(!IsPostBack)
+        {
+            this.Master.btnActivity.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+        }
         if(Session["jobskyerID"]==null)
         {
             Response.Redirect("~/JsCommon/Login.aspx");

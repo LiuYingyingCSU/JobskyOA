@@ -1,5 +1,5 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="SignInAndOut.aspx.cs" Inherits="JsCommon_SignInAndOut" %>
-
+<%@ MasterType VirtualPath="~/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main_ContentPlaceHolder" Runat="Server">
@@ -46,7 +46,7 @@
                 <asp:Label ID="lbPage" runat="server" Text="1"></asp:Label>
                 &nbsp;
                 <asp:Label ID="lbAll" runat="server" Text="总页数："></asp:Label>
-                <asp:Label ID="lbCount" runat="server" Text=""></asp:Label>
+                <asp:Label ID="lbCount" runat="server" Text="1"></asp:Label>
                 &nbsp;<asp:LinkButton ID="lbtnFirst" runat="server" onclick="lbtnFirst_Click">首页</asp:LinkButton> 
                 &nbsp;<asp:LinkButton ID="lbtnUp" runat="server" onclick="lbtnUp_Click">上一页</asp:LinkButton> 
                 &nbsp;<asp:LinkButton ID="lbtnDown" runat="server" onclick="lbtnDown_Click">下一页</asp:LinkButton> 

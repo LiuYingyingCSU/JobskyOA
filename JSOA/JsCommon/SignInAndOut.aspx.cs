@@ -12,6 +12,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         AddLinkedStyle("/CSS/SignIn.css");
         if (Session["jobskyerID"] == null)
         {
@@ -20,7 +21,9 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         }
         
         if(!IsPostBack)
-        {//判断Button显示与否
+        {
+            this.Master.btnSign.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+            //判断Button显示与否
             ImgbtnSignIn.Enabled = false;
             DLSignInTo.Enabled = false;
             DLSignInTo.Visible = false;
@@ -28,9 +31,10 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
             lblMessage.Visible = false;
             ShowButton();
             rptBind();
-            state();
+            
             DlistBind();
         }
+        state();
     }
     protected void AddLinkedStyle(string url)
     {
@@ -49,8 +53,8 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         myCom = new SqlCommand("select count(*) FROM MY_DUTY_TIME WHERE jobskyerID='" + Session["jobskyerID"] + "'", myCon); //获得该组文件的总个数
         this.lbCount.Text = (Convert.ToInt32(myCom.ExecuteScalar())/4).ToString();  //算出总页数为DropdownList赋值
         int[] num = new int[Convert.ToInt32(lbCount.Text)];
-        Response.Write(lbCount.Text.ToString());
-        Response.Write(lbPage.Text.ToString());
+        //Response.Write(lbCount.Text.ToString());
+        //Response.Write(lbPage.Text.ToString());
         for (int i = 1; i <= Convert.ToInt32(lbCount.Text); i++)
         {
             num[i - 1] = i;
@@ -489,8 +493,9 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
     }
     public void state()
     {
-        if (lbPage.Text.ToString() == "1" && lbPage.Text.ToString() == lbCount.Text.ToString())
+        if (lbCount.Text.ToString()=="1"||lbCount.Text.ToString()=="0")
         {
+            lbCount.Text = "1";
             lbtnFirst.Enabled = false;
             lbtnUp.Enabled = false;
             lbtnDown.Enabled = false;

@@ -29,7 +29,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
             fileGroup = Request.QueryString["fileGroup"];
             path = Request.QueryString["filePath"];
         }
-        
+        //加入css样式文件
         AddLinkedStyle("/CSS/FileArt.css");
         if(Session["jobName"]==null)
         {
@@ -40,9 +40,10 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         if(!IsPostBack)
         {
             rptBind();
-            state();
+            
             DlistBind();
         }
+        state();
     }
     protected void AddLinkedStyle(string url)
     {
@@ -189,26 +190,37 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
     }
     public void state()
     {
-        if (lbPage.Text.ToString() == "1") 
+        if (lbCount.Text.ToString() == "1" || lbCount.Text.ToString() == "0")
         {
+            lbCount.Text = "1";
             lbtnFirst.Enabled = false;
             lbtnUp.Enabled = false;
-            lbtnDown.Enabled = true;
-            lbtnLast.Enabled = true;
-        }
-        if(lbPage.Text==lbCount.Text)
-        {
-            lbtnFirst.Enabled = true;
-            lbtnUp.Enabled = true;
             lbtnDown.Enabled = false;
             lbtnLast.Enabled = false;
         }
-        else if(Convert.ToInt32(lbPage.Text)>1&&Convert.ToInt32(lbPage.Text)<Convert.ToInt32(lbCount.Text))
+        else
         {
-            lbtnFirst.Enabled = true;
-            lbtnUp.Enabled = true;
-            lbtnDown.Enabled = true;
-            lbtnLast.Enabled = true;
+            if (lbPage.Text.ToString() == "1")
+            {
+                lbtnFirst.Enabled = false;
+                lbtnUp.Enabled = false;
+                lbtnDown.Enabled = true;
+                lbtnLast.Enabled = true;
+            }
+            if (lbPage.Text.ToString() == lbCount.Text.ToString())
+            {
+                lbtnFirst.Enabled = true;
+                lbtnUp.Enabled = true;
+                lbtnDown.Enabled = false;
+                lbtnLast.Enabled = false;
+            }
+            else if (Convert.ToInt32(lbPage.Text) > 1 && Convert.ToInt32(lbPage.Text) < Convert.ToInt32(lbCount.Text))
+            {
+                lbtnFirst.Enabled = true;
+                lbtnUp.Enabled = true;
+                lbtnDown.Enabled = true;
+                lbtnLast.Enabled = true;
+            }
         }
     }
     protected void lbtnFirst_Click(object sender, EventArgs e)

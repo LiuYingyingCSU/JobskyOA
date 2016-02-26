@@ -23,7 +23,7 @@
         <div class="login">
             <div class="login_top"> 登录
            </div>
-                       <table >
+                       <table style="width:100%" >
                                 <tr class="userid">
                                     <td class="auto-style1">
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">学号:</asp:Label>
@@ -58,7 +58,7 @@
                                 </tr>
                                 
                             </table>
-                    <div style="width:63%;margin-top:20px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">    
+                    <div style="width:72%;margin-top:20px;border-bottom-left-radius:10px;border-bottom-right-radius:10px;">    
                       <asp:ImageButton ID="btnLogin" runat="server" CommandName ="Login" OnClick="btnLogin_Click1" ValidationGroup="Login1" />
                   </div>
             </div>

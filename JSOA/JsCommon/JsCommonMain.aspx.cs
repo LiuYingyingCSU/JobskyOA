@@ -11,6 +11,10 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        if(!IsPostBack)
+        {
+            this.Master.btnMain.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+        }
         //判断用户是否已登录
          DB db = new DB();
          string jobName = HttpContext.Current.User.Identity.Name;
