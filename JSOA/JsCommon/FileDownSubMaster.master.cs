@@ -9,9 +9,10 @@ public partial class JsCommon_FileDownSubMaster : System.Web.UI.MasterPage
 {
     protected void Page_Load(object sender, EventArgs e)
     {
+        
         if(!IsPostBack)
         {
-            this.Master.btnFile.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+            this.Master.btnFile.ImageUrl = "~/Image/Button/file-01.PNG";
         }
         if(Session["jobskyerID"]==null)
         {

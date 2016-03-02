@@ -11,7 +11,7 @@ public partial class JsCommon_ActivitySubMaster : System.Web.UI.MasterPage
     {
         if(!IsPostBack)
         {
-            this.Master.btnActivity.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+            this.Master.btnActivity.ImageUrl = "~/Image/Button/Activity.PNG";
         }
         if(Session["jobskyerID"]==null)
         {

@@ -8,7 +8,7 @@
         <asp:ImageButton ID="ImgbtnProgram" runat="server" OnClick="ImgbtnProgram_Click" />
         <asp:ImageButton ID="ImgbtnArt" runat="server" OnClick="ImgbtnArt_Click" />
         <asp:ImageButton ID="ImgbtnNet" runat="server" OnClick="ImgbtnNet_Click" />
-        <asp:ImageButton ID="ImgbtnOffice" runat="server" OnClick="ImgbtnOffice_Click" style="width: 14px" />
+        <asp:ImageButton ID="ImgbtnOffice" runat="server" OnClick="ImgbtnOffice_Click" />
     </div>
     <div class="FD_content">
     <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">

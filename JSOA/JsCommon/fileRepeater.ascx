@@ -30,11 +30,11 @@
                     <div class="tableContent">
                         <asp:Label ID="lblSex" runat="server" Text='<%#Eval("fileUpTime")%>'></asp:Label></div>
                     <div class="tableContent">
-                        <a href='<%#GetPath(Eval("fileName").ToString())%>'>下载</a>
+                        <a href='<%#GetPath(Eval("fileName").ToString())%>' style="color: #FFFFFF">下载</a>
                     </div>
                     <div class="tableContent">
                         <asp:LinkButton ID="lbtnDelete" CommandName="lbtnDelete" runat="server" CommandArgument='<%#Eval("fileName") %>'
-                            OnClientClick="javascript:return confirm('确认删除此文件吗？')" Text="删除"></asp:LinkButton></div> 
+                            OnClientClick="javascript:return confirm('确认删除此文件吗？')" Text="删除" ForeColor="White"></asp:LinkButton></div> 
                          
             </ItemTemplate>
         </asp:Repeater>
@@ -46,10 +46,10 @@
                 &nbsp;
                 <asp:Label ID="lbAll" runat="server" Text="总页数："></asp:Label>
                 <asp:Label ID="lbCount" runat="server" Text=""></asp:Label>
-                &nbsp;<asp:LinkButton ID="lbtnFirst" runat="server" onclick="lbtnFirst_Click">首页</asp:LinkButton> 
-                &nbsp;<asp:LinkButton ID="lbtnUp" runat="server" onclick="lbtnUp_Click">上一页</asp:LinkButton> 
-                &nbsp;<asp:LinkButton ID="lbtnDown" runat="server" onclick="lbtnDown_Click">下一页</asp:LinkButton> 
-                &nbsp;<asp:LinkButton ID="lbtnLast" runat="server" onclick="lbtnLast_Click">尾页</asp:LinkButton> 
+                &nbsp;<asp:LinkButton ID="lbtnFirst" runat="server" onclick="lbtnFirst_Click" ForeColor="White">首页</asp:LinkButton> 
+                &nbsp;<asp:LinkButton ID="lbtnUp" runat="server" onclick="lbtnUp_Click" ForeColor="White">上一页</asp:LinkButton> 
+                &nbsp;<asp:LinkButton ID="lbtnDown" runat="server" onclick="lbtnDown_Click" ForeColor="White">下一页</asp:LinkButton> 
+                &nbsp;<asp:LinkButton ID="lbtnLast" runat="server" onclick="lbtnLast_Click" ForeColor="White">尾页</asp:LinkButton> 
                 &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" Width="80px">
                 </asp:DropDownList> 
                 <asp:LinkButton ID="lbtnGo" runat="server"  BackColor="LightBlue"

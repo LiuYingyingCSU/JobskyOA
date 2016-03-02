@@ -94,24 +94,35 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
     protected void rptBind()
     {
         //DB db = new DB();
-        int n = 4* (Convert.ToInt32(lbPage.Text)-1);
-        SqlConnection myCon = db.GetCon();
-        myCon.Open();
-
-        string sqlstr = "SELECT TOP 4 fileUpTime,fileName,jobskyerID FROM FILES WHERE fileGroup='" + fileGroup + "' and fileID not in (select top (@n) fileID from FILES where fileGroup='" + fileGroup + "' order by fileID desc) order by fileID desc";
-        SqlCommand mycom=new SqlCommand(sqlstr,myCon);
-        mycom.Parameters.Add("n", n);
-        SqlDataAdapter da = new SqlDataAdapter(mycom);
-        DataSet ds = new DataSet();
-        da.Fill(ds);
-        ds.Dispose();
-        da.Dispose();
-        myCon.Close();
-        if(ds!=null)
+        try
         {
-            this.Repeater1.DataSource = ds;
-            this.Repeater1.DataBind();
+            int n = 4 * (Convert.ToInt32(lbPage.Text) - 1);
+            SqlConnection myCon = db.GetCon();
+            myCon.Open();
+            string sqlstr = "SELECT TOP 4 fileUpTime,fileName,jobskyerID FROM FILES WHERE fileGroup='" + fileGroup + "' and fileID not in (select top (@n) fileID from FILES where fileGroup='" + fileGroup + "' order by fileID desc) order by fileID desc";
+            SqlCommand mycom = new SqlCommand(sqlstr, myCon);
+            mycom.Parameters.Add("n", n);
+            SqlDataAdapter da = new SqlDataAdapter(mycom);
+            DataSet ds = new DataSet();
+            da.Fill(ds);
+            ds.Dispose();
+            da.Dispose();
+            myCon.Close();
+            if (ds != null)
+            {
+                this.Repeater1.DataSource = ds;
+                this.Repeater1.DataBind();
+            }
         }
+        catch(Exception ee)
+        {
+            Response.Write(ee);
+        }
+        finally
+        {  
+            
+        }
+        
     }
 
     protected void btnFileUp_Click(object sender, EventArgs e)
