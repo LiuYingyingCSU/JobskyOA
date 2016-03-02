@@ -17,7 +17,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         }
         //Response.Write(ipAddress);
     }
-    //用于内容页访问母版页的属性
+    //以下为自定义属性，用于内容页访问母版页的控件的属性
     public ImageButton btnMain
     {
         get
@@ -75,7 +75,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
     protected void Main_ImgBtn_Click(object sender, ImageClickEventArgs e)
     {
-        Main_ImgBtn.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+        //Main_ImgBtn.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
         Response.Redirect("~/JsCommon/JsCommonMain.aspx");
     }
     protected void SignIn_ImgBtn_Click(object sender, ImageClickEventArgs e)
@@ -84,7 +84,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
     protected void Activity_ImgBtn_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/JsCommon/Diary.aspx");
+        //Response.Redirect("~/JsCommon/Diary.aspx");
     }
     protected void FileDown_ImgBtn_Click(object sender, ImageClickEventArgs e)
     {
@@ -94,7 +94,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
     {
         //Response.Redirect("~/JsCommon/BBS.aspx");
     }
-    protected void ImgbtnLogout_Click(object sender, ImageClickEventArgs e)
+    protected void btnLogout_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/JsCommon/Login.aspx");
     }

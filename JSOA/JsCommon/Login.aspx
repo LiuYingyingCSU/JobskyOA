@@ -7,16 +7,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title></title>
     <link href="../CSS/Login.css" rel="stylesheet" type="text/css" />
-    <style type="text/css" >   
-        .auto-style1 {
-            width: 15%;
-            background-color: antiquewhite;
-        }
-        .auto-style3 {
-            width: 58%;
-            background-color: antiquewhite;
-        }
-    </style>
 </head>
 <body>
     <form id="form1" runat="server">
@@ -29,7 +19,7 @@
                                         <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">学号:</asp:Label>
                                     </td>
                                     <td class="auto-style3">
-                                        <asp:TextBox ID="UserName" runat="server" style="margin-left: 7px" Width="181px" Height="25px"></asp:TextBox>
+                                        <asp:TextBox ID="UserName" runat="server" style="margin-left: 7px;border:none;" Width="181px" Height="25px"></asp:TextBox>
                                     </td>
                                     <td>    
                                         <asp:Label ID="lblUser" runat="server" Text="用户名不能为空"></asp:Label>
@@ -40,7 +30,7 @@
                                         <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">密码:</asp:Label>
                                     </td>
                                     <td class="auto-style3"  >
-                                        <asp:TextBox ID="Password" runat="server" TextMode="Password" style="margin-left: 8px" Width="181px" Height="25px"></asp:TextBox>
+                                        <asp:TextBox ID="Password" runat="server" TextMode="Password" style="margin-left: 7px;border:none;" Width="181px" Height="25px"></asp:TextBox>
                                     </td>
                                     <td>     
                                           <asp:Label ID="lblPwd" runat="server" Text="密码不能为空"></asp:Label>

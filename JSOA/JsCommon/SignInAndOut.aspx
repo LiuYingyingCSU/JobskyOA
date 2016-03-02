@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main_ContentPlaceHolder" Runat="Server">
-    <div>
+    <div >
         <div class="sign">
      <asp:ImageButton ID="ImgbtnSignIn" runat="server" ImageUrl="~/Image/Sign/SignIn.PNG" OnClick="ImgbtnSignIn_Click" />
      <asp:DropDownList ID="DLSignInTo" runat="server">
@@ -39,8 +39,8 @@
                     </p>
                 </ItemTemplate>
             </asp:Repeater>
-            </div>
-                <div class="bottom">
+        </div>
+        <div class="bottom">
                <div class="page">
                      <asp:Label ID="lbNow" runat="server" Text="当前页："></asp:Label>
                 <asp:Label ID="lbPage" runat="server" Text="1"></asp:Label>

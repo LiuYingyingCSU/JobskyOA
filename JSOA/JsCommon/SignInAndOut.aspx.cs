@@ -12,7 +12,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
     
     protected void Page_Load(object sender, EventArgs e)
     {
-        
+        //内容页页不含<html>等标签，通过HtmlLink类引用外部样式
         AddLinkedStyle("/CSS/SignIn.css");
         if (Session["jobskyerID"] == null)
         {
@@ -22,7 +22,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         
         if(!IsPostBack)
         {
-            this.Master.btnSign.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+            this.Master.btnSign.ImageUrl = "~/Image/Button/Sign.PNG";
             //判断Button显示与否
             ImgbtnSignIn.Enabled = false;
             DLSignInTo.Enabled = false;
@@ -30,8 +30,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
             //ImgbtnSignOut.Enabled = false;
             lblMessage.Visible = false;
             ShowButton();
-            rptBind();
-            
+            rptBind();  
             DlistBind();
         }
         state();
@@ -44,7 +43,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         hLink.Attributes.Add("href", url);
         Page.Header.Controls.Add(hLink);
     }
-    public void DlistBind()
+    public void DlistBind()    //下拉框数据绑定
     {
         DB db = new DB();
         SqlConnection myCon = db.GetCon();
@@ -62,7 +61,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         DropDownList1.DataSource = num;
         DropDownList1.DataBind();
     }
-    protected void rptBind()
+    protected void rptBind()        //repeater数据绑定
     {
         DB db = new DB();
         int n = 4 * (Convert.ToInt32(lbPage.Text) - 1);
@@ -83,7 +82,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
             this.Repeater1.DataBind();
         }
     }
-    public string GetJobName(object jobskyerID)
+    public string GetJobName(object jobskyerID)             //把jobskyerID转化为jobName输出
     {
         DB db = new DB();
         SqlDataReader dr = db.reDr("SELECT jobName FROM JOBSKYER WHERE jobskyerID='" + jobskyerID + "'");
@@ -103,6 +102,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         //判断表中是否非空
         if(ds.Tables[0].Rows.Count>0&&ds.Tables[1].Rows.Count>0&&ds.Tables[2].Rows.Count>0)
         {
+            
             for(int i=0;i<ds.Tables[1].Rows.Count;i++)
             {
                 //当天有值班人为当前用户的未签退记录
@@ -112,8 +112,9 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                     for (int j = 0; j < ds.Tables[0].Rows.Count;j++ )
                     {
                         //找到
-                        if(ds.Tables[0].Rows[j]["jobskyerID"].ToString().Trim()==ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim())
+                        if (ds.Tables[0].Rows[j]["jobskyerID"].ToString().Trim() == ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim() && Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyOutTime"]).ToShortDateString() == nowTime.ToShortDateString())
                         {
+                            
                             flag = 1;
                             Session["dutyRecordID"] = ds.Tables[1].Rows[i]["dutyRecordID"].ToString();
                             dutyOutTime = Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyOutTime"].ToString());
@@ -154,6 +155,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                             //如果在值班期间，显示值班提示信息
                         else if(dutyOutTime.DayOfWeek==nowTime.DayOfWeek&&differOfTime(nowTime,dutyInTime)>60&&differOfTime(dutyOutTime,nowTime)>30)
                         {
+                            
                             for (int k = 0; k < ds.Tables[2].Rows.Count; k++)
                             {
                                 if (ds.Tables[2].Rows[k]["jobskyerID"].ToString().Trim() == ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim())
@@ -161,13 +163,17 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                                     Session["toJobName"] = ds.Tables[2].Rows[k]["jobName"].ToString().Trim();
                                     if (Session["jobskyerID"].ToString().Trim() == ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim())
                                     {
+                                        
+                                        flag = 1;
                                         lblMessage.Visible = true;
                                         lblMessage.Text =  Session["jobName"].ToString()+ "正在值班,未到签退时间";
-                                        
+                                        ImgbtnSignIn.Enabled = false;
                                     }
                                     else
-                                    {                     
+                                    {
+                                        flag = 1;
                                         lblMessage.Visible = true;
+                                        ImgbtnSignIn.Enabled = false;
                                         //DLSignInTo.Enabled = false;
                                         //DLSignInTo.Visible = false;
                                         //DLSignInTo.SelectedValue = Session["toJobName"].ToString();
@@ -178,6 +184,8 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                         }
                         else if(differOfTime(nowTime,dutyOutTime)>60)
                         {
+                            //Response.Write("3");
+                            //Response.Write(dutyOutTime);
                             flag = 0;
                             ImgbtnSignIn.ImageUrl = "~/Image/Sign/SignIn.PNG";
                             DLSignInTo.Visible = false;
@@ -191,12 +199,15 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         //签到
         if(ds!=null&&ds.Tables.Count>0&&ds.Tables[0].Rows.Count>0&&flag==0)
         {
+            //Response.Write("3");
             for(int i=0;i<ds.Tables[0].Rows.Count;i++)
             {
                 if(ds.Tables[0].Rows[i]["jobskyerID"].ToString().Trim()==Session["jobskyerID"].ToString())
                 {
+                    
                     for (int j = 0; j < ds.Tables[1].Rows.Count;j++ )
                     {
+                        //Response.Write("2");
                         //检查当天是否已值班（被代班）
                         if (Convert.ToDateTime(ds.Tables[1].Rows[j]["dutyInTime"].ToString()).DayOfWeek==nowTime.DayOfWeek&&ds.Tables[1].Rows[j]["jobskyerID"].ToString() != Session["jobskyerID"].ToString()&&ds.Tables[1].Rows[j]["toJobskyerID"].ToString() == Session["jobskyerID"].ToString()&&nowTime.DayOfWeek.ToString()== Convert.ToDateTime( ds.Tables[0].Rows[i]["dutyInTime"]).DayOfWeek.ToString())
                         {
@@ -491,9 +502,9 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         state();
         rptBind();
     }
-    public void state()
+    public void state()        //判断首页、上页、下页、尾页的可用状态
     {
-        if (lbCount.Text.ToString()=="1"||lbCount.Text.ToString()=="0")
+        if (lbCount.Text.ToString()=="1"||lbCount.Text.ToString()=="0")  //仅一页或无信息
         {
             lbCount.Text = "1";
             lbtnFirst.Enabled = false;
@@ -503,7 +514,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         }
         else
         {
-            if (lbPage.Text.ToString() == "1")
+            if (lbPage.Text.ToString() == "1")            //当前页为1，上一页不可用
             {
                 lbtnFirst.Enabled = false;
                 lbtnUp.Enabled = false;
@@ -528,6 +539,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         
         
     }
+    //每一次点击选页按钮，都要进行一次数据绑定以及按钮状态判断
     protected void lbtnFirst_Click(object sender, EventArgs e)
     {
         lbPage.Text = "1";
