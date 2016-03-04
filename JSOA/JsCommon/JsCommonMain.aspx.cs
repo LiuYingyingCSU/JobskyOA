@@ -66,6 +66,7 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
         ImgbtnProfile.ImageUrl = imgUrl;
         dr2.Close();
     }
+
     public string GetJobName(object jobskyerID)             //把jobskyerID转化为jobName输出
     {
         DB db = new DB();
@@ -94,4 +95,5 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             this.Repeater1.DataBind();
         }
     }
+   
 }

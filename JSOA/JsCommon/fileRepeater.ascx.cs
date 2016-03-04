@@ -28,6 +28,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         {
             fileGroup = Request.QueryString["fileGroup"];
             path = Request.QueryString["filePath"];
+            //Response.Write(path);
         }
         //加入css样式文件
         AddLinkedStyle("/CSS/FileArt.css");
@@ -68,8 +69,8 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
     {
         DateTime nowTime = DateTime.Now;
         string strFileName = fileUp.FileName;
-    //  string filePath = Server.MapPath("../File/Art/") + strFileName;
-        string filePath = path + strFileName;
+        //string filePath = Server.MapPath("../File/Program/") + strFileName;
+        string filePath = Server.MapPath(path) + strFileName;
         string sqlFU = "INSERT INTO FILES (fileName,jobskyerID,fileGroup,fileUpTime,filePath) values('" + strFileName + "','" + Session["jobskyerID"] + "','" + fileGroup.ToString() + "','" + nowTime.ToString() + "','" + strFileName + "')";
         isUpload = db.SqlEX(sqlFU);
         fileUp.SaveAs(filePath);
@@ -160,24 +161,35 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
     {
         if (e.CommandName == "lbtnDelete")
         {
+            
             int isDel = 0;
             string fileName = e.CommandArgument.ToString();
-            string filePath = path+fileName;
+            //string filePath = Server.MapPath("../File/Program/") + fileName;
+            string filePath = Server.MapPath(path) + fileName;
+            
             FileInfo file = new FileInfo(filePath);//指定文件路径
             if (file.Exists)//判断文件是否存在
             {
+                //Response.Write("1");
                 file.Attributes = FileAttributes.Normal;//将文件属性设置为普通,比方说只读文件设置为普通
                 file.Delete();//删除文件
                 isDel = 1;
             }
             string deleteStr="DELETE FROM FILES WHERE fileName='"+fileName+"'";
             int isDeleteSql = db.SqlEX(deleteStr);
-            if (isDeleteSql > 0&&isDel==1)
-            if(isDel==1)
-            {
-                rptBind();
-                lblDelMess.Visible = true;
-                lblDelMess.Text = "删除成功";
+            if (isDeleteSql > 0)
+            { 
+               if(isDel==1)
+               {
+                   rptBind();
+                   lblDelMess.Visible = true;
+                   lblDelMess.Text = "删除成功";
+               }
+               else
+               {
+                   lblDelMess.Visible = true;
+                   lblDelMess.Text = "删除失败";
+                }
             }
             else
             {

@@ -5,10 +5,10 @@
 </asp:Content>
 <asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
     <div class="FD_head">
-        <asp:ImageButton ID="ImgbtnProgram" runat="server" OnClick="ImgbtnProgram_Click" />
-        <asp:ImageButton ID="ImgbtnArt" runat="server" OnClick="ImgbtnArt_Click" />
-        <asp:ImageButton ID="ImgbtnNet" runat="server" OnClick="ImgbtnNet_Click" />
-        <asp:ImageButton ID="ImgbtnOffice" runat="server" OnClick="ImgbtnOffice_Click" />
+        <asp:ImageButton ID="ImgbtnProgram" runat="server" OnClick="ImgbtnProgram_Click" ImageUrl="~/Image/Button/Program.png" />
+        <asp:ImageButton ID="ImgbtnArt" runat="server" OnClick="ImgbtnArt_Click" ImageUrl="~/Image/Button/Art.png" />
+        <asp:ImageButton ID="ImgbtnNet" runat="server" OnClick="ImgbtnNet_Click" ImageUrl="~/Image/Button/Net.png" />
+        <asp:ImageButton ID="ImgbtnOffice" runat="server" OnClick="ImgbtnOffice_Click" ImageUrl="~/Image/Button/Office.png" />
     </div>
     <div class="FD_content">
     <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">

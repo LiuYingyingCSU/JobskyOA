@@ -70,14 +70,14 @@ public partial class JsCommon_FileDownSubMaster : System.Web.UI.MasterPage
     }
     protected void ImgbtnArt_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/JsCommon/FileArt.aspx?fileGroup=美工组&filePath=/File/Art/");
+        Response.Redirect("~/JsCommon/FileProgram.aspx?fileGroup=美工组&filePath=/File/Art/");
     }
     protected void ImgbtnNet_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/JsCommon/FileNet.aspx?fileGroup=网络组&filePath=/File/Net/");
+        Response.Redirect("~/JsCommon/FileProgram.aspx?fileGroup=网络组&filePath=/File/Net/");
     }
     protected void ImgbtnOffice_Click(object sender, ImageClickEventArgs e)
     {
-        Response.Redirect("~/JsCommon/FileOffice.aspx?fileGroup=办公室&filePath=/File/Office/");
+        Response.Redirect("~/JsCommon/FileProgram.aspx?fileGroup=办公室&filePath=/File/Office/");
     }
 }
