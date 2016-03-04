@@ -75,7 +75,8 @@ public partial class MasterPage : System.Web.UI.MasterPage
     }
     protected void Main_ImgBtn_Click(object sender, ImageClickEventArgs e)
     {
-        //Main_ImgBtn.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+
+        Main_ImgBtn.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
         Response.Redirect("~/JsCommon/JsCommonMain.aspx");
     }
     protected void SignIn_ImgBtn_Click(object sender, ImageClickEventArgs e)
@@ -97,5 +98,6 @@ public partial class MasterPage : System.Web.UI.MasterPage
     protected void btnLogout_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/JsCommon/Login.aspx");
+
     }
 }

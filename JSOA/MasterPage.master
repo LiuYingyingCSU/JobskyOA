@@ -8,11 +8,11 @@
     <title></title>
     <link href="CSS/MasterPage.css" rel="stylesheet" type="text/css" />
     <asp:ContentPlaceHolder id="head" runat="server">
+
     </asp:ContentPlaceHolder>
 </head>
 <body >
     <form id="form1" runat="server">
-        <div style="background-image:url('../Image/JsCommonMain/Background')">
     <div class="bar_top">
         <div style="width:115px;height:95px;background-image:url('../Image/Button/Logo.png');position:absolute;margin-top:-20px;margin-left:5px;">
         </div>
@@ -44,7 +44,6 @@
         </div>
         
     </div>
- </div>
     </form>
 </body>
 </html>

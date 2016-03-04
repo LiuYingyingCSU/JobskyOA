@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
 using System.Data;
 
+
 public partial class JsCommon_JsCommonMain : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
@@ -95,5 +96,4 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             this.Repeater1.DataBind();
         }
     }
-   
 }
