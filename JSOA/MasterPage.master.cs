@@ -13,7 +13,7 @@ public partial class MasterPage : System.Web.UI.MasterPage
         string ipAddress = HttpContext.Current.Request.UserHostAddress;
         if (ipAddress.Substring(0, 3) != "::1")
         {
-            SignIn_ImgBtn.Enabled = false;
+            //SignIn_ImgBtn.Enabled = false;
         }
         //Response.Write(ipAddress);
     }
