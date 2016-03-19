@@ -13,26 +13,35 @@
         <asp:Label ID="lblMessage" runat="server" Text="提示信息"></asp:Label>
        </div>
         <div class="tableHeader">
-            <p class="tableHead">
+            <p class="JobName">
                 值班人</p>
             <p class="tableHead">
                 签到</p>
+            <p class="state">
+                状态</p>
             <p class="tableHead">
                 签退</p>
+            <p class="state">状态</p>
             <p class="tableHead">
                 被代班人</p>
         </div>
         <div class="tableBody">
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
-                    <p class="tableContent">
+                    <p class="tableJobName">
                         <asp:Label ID="lbljobName" runat="server" Text='<%#GetJobName(Eval("jobskyerID").ToString())%>'></asp:Label>
                     </p>
                     <p class="tableContent">
                         <asp:Label ID="lblSignIn" runat="server" Text='<%# Eval("dutyInTime")%>'></asp:Label>
                     </p>
+                    <p class="ts">
+                        <asp:Label ID="lbState0" runat="server" Text='<%#GetState0(Eval("flag0")) %>'></asp:Label>
+                    </p>
                     <p class="tableContent">
                         <asp:Label ID="lblSignOut" runat="server" Text='<%#Eval("dutyOutTime")%>'></asp:Label>
+                    </p>
+                    <p class="ts">
+                        <asp:Label ID="lbState1" runat="server" Text='<%#GetState1(Eval("flag1")) %>'></asp:Label>
                     </p>
                     <p class="tableContent">
                         <asp:Label ID="lblSignInto" runat="server" Text='<%#GetJobName(Eval("toJobskyerID").ToString())%>' ></asp:Label>

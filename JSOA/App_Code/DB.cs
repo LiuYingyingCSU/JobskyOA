@@ -49,6 +49,7 @@ public class DB
         finally
         {
             scon.Dispose();                //释放连接对象资源
+            scon.Close();
         }
     }
     /// <summary>
@@ -75,13 +76,15 @@ public class DB
         scon.Open();
         SqlCommand scom = new SqlCommand(str, scon);
         SqlDataReader dr = scom.ExecuteReader(CommandBehavior.CloseConnection);
+        //scon.Dispose();
+        //scon.Close();
         return dr;                          //返回SqlDataReader对象dr
     }
-    /// <summary>
-    /// MD5加密
-    /// </summary>
-    /// <param name="strPwd">被加密的字符串</param>
-    /// <returns>返回加密后的字符串</returns>
+    // <summary>
+    // MD5加密
+    // </summary>
+    // <param name="strPwd">被加密的字符串</param>
+    // <returns>返回加密后的字符串</returns>
     //public string GetMD5(string strPwd)
     //{
     //    MD5 md5 = new MD5CryptoServiceProvider();

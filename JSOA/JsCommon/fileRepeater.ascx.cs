@@ -41,7 +41,6 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         if(!IsPostBack)
         {
             rptBind();
-            
             DlistBind();
         }
         state();
@@ -61,7 +60,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
     public string GetJobName(object jobskyerID)
     {
         
-        SqlDataReader dr = db.reDr("SELECT jobName FROM JOBSKYER WHERE jobskyerID='" + jobskyerID + "'");
+        SqlDataReader dr = db.reDr("SELECT jobName FROM jobskyer WHERE jobskyerID='" + jobskyerID + "'");
         dr.Read();
         return dr.GetValue(0).ToString();
     }
@@ -71,18 +70,16 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         string strFileName = fileUp.FileName;
         //string filePath = Server.MapPath("../File/Program/") + strFileName;
         string filePath = Server.MapPath(path) + strFileName;
-        string sqlFU = "INSERT INTO FILES (fileName,jobskyerID,fileGroup,fileUpTime,filePath) values('" + strFileName + "','" + Session["jobskyerID"] + "','" + fileGroup.ToString() + "','" + nowTime.ToString() + "','" + strFileName + "')";
+        string sqlFU = "INSERT INTO files (fileName,jobskyerID,fileGroup,fileUpTime,filePath) values('" + strFileName + "','" + Session["jobskyerID"] + "','" + fileGroup.ToString() + "','" + nowTime.ToString() + "','" + strFileName + "')";
         isUpload = db.SqlEX(sqlFU);
         fileUp.SaveAs(filePath);
-      
-            
     }
     public void DlistBind()
     {
         SqlConnection myCon = db.GetCon();
         SqlCommand myCom = new SqlCommand();
         myCon.Open();
-        myCom = new SqlCommand("select count(*) from FILES WHERE fileGroup='"+fileGroup+"'",myCon); //获得该组文件的总个数
+        myCom = new SqlCommand("select count(*) from files WHERE fileGroup='"+fileGroup+"'",myCon); //获得该组文件的总个数
         this.lbCount.Text = (Convert.ToInt32(myCom.ExecuteScalar()) / 4).ToString();  //算出总页数为DropdownList赋值
         int[] num = new int[Convert.ToInt32(lbCount.Text)];
         for(int i=1;i<=Convert.ToInt32(lbCount.Text);i++)
@@ -91,6 +88,9 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         }
         DropDownList1.DataSource = num;
         DropDownList1.DataBind();
+        myCom.Dispose();
+        myCon.Dispose();
+        myCon.Close();
     }
     protected void rptBind()
     {
@@ -100,7 +100,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
             int n = 4 * (Convert.ToInt32(lbPage.Text) - 1);
             SqlConnection myCon = db.GetCon();
             myCon.Open();
-            string sqlstr = "SELECT TOP 4 fileUpTime,fileName,jobskyerID FROM FILES WHERE fileGroup='" + fileGroup + "' and fileID not in (select top (@n) fileID from FILES where fileGroup='" + fileGroup + "' order by fileID desc) order by fileID desc";
+            string sqlstr = "SELECT TOP 4 fileUpTime,fileName,jobskyerID FROM files WHERE fileGroup='" + fileGroup + "' and fileID not in (select top (@n) fileID from FILES where fileGroup='" + fileGroup + "' order by fileID desc) order by fileID desc";
             SqlCommand mycom = new SqlCommand(sqlstr, myCon);
             mycom.Parameters.Add("n", n);
             SqlDataAdapter da = new SqlDataAdapter(mycom);
@@ -108,6 +108,8 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
             da.Fill(ds);
             ds.Dispose();
             da.Dispose();
+            mycom.Dispose();
+            myCon.Dispose();
             myCon.Close();
             if (ds != null)
             {
@@ -150,6 +152,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
                 lblMessage.Visible=true;
                 lblMessage.Text = "请选择文件";
             }
+            rptBind();
         }
         catch(Exception ep)
         {
@@ -175,7 +178,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
                 file.Delete();//删除文件
                 isDel = 1;
             }
-            string deleteStr="DELETE FROM FILES WHERE fileName='"+fileName+"'";
+            string deleteStr="DELETE FROM files WHERE fileName='"+fileName+"'";
             int isDeleteSql = db.SqlEX(deleteStr);
             if (isDeleteSql > 0)
             { 
@@ -216,6 +219,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         if (lbCount.Text.ToString() == "1" || lbCount.Text.ToString() == "0")
         {
             lbCount.Text = "1";
+            lbtnGo.Enabled = false;
             lbtnFirst.Enabled = false;
             lbtnUp.Enabled = false;
             lbtnDown.Enabled = false;

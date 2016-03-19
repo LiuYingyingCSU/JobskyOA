@@ -1,9 +1,11 @@
 ﻿body
 {
       margin:0;
-      width:1400px;
-      height:800px;
+      width:100%;
+      height:600px;
       background-image:url('../Image/JsCommonMain/Background-01.png');
+      background-repeat:no-repeat;
+      
 }
 .login
 {

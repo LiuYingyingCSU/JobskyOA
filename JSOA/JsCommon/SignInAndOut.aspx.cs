@@ -29,7 +29,8 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
             DLSignInTo.Enabled = false;
             DLSignInTo.Visible = false;
             //ImgbtnSignOut.Enabled = false;
-            lblMessage.Visible = false;
+            lblMessage.Visible = true;
+            lblMessage.Text = "当前不在签到时间内";
             ShowButton();
             rptBind();  
             DlistBind();
@@ -50,11 +51,13 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         SqlConnection myCon = db.GetCon();
         SqlCommand myCom = new SqlCommand();
         myCon.Open();
-        myCom = new SqlCommand("select count(*) FROM MY_DUTY_TIME WHERE jobskyerID='" + Session["jobskyerID"] + "'", myCon); //获得该组文件的总个数
+        myCom = new SqlCommand("select count(*) FROM myDutyTime WHERE jobskyerID='" + Session["jobskyerID"] + "'", myCon); //获得该组文件的总个数
         this.lbCount.Text = (Convert.ToInt32(myCom.ExecuteScalar())/4).ToString();  //算出总页数为DropdownList赋值
         int[] num = new int[Convert.ToInt32(lbCount.Text)];
         //Response.Write(lbCount.Text.ToString());
         //Response.Write(lbPage.Text.ToString());
+        myCom.Dispose();
+        myCon.Close();
         for (int i = 1; i <= Convert.ToInt32(lbCount.Text); i++)
         {
             num[i - 1] = i;
@@ -68,7 +71,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         int n = 4 * (Convert.ToInt32(lbPage.Text) - 1);
         SqlConnection myCon = db.GetCon();
         myCon.Open();
-        string sqlstr = "SELECT TOP 4 jobskyerID,dutyInTime,dutyOutTime,toJobskyerID FROM MY_DUTY_TIME WHERE jobskyerID='" + Session["jobskyerID"] + "' and jobskyerID not in (select top (@n) jobskyerID from FILES where jobskyerID='" + Session["jobskyerID"] + "')";
+        string sqlstr = "SELECT TOP 4 jobskyerID,dutyInTime,dutyOutTime,toJobskyerID,flag0,flag1 FROM myDutyTime WHERE jobskyerID='" + Session["jobskyerID"] + "' and jobskyerID not in (select top (@n) jobskyerID from FILES where jobskyerID='" + Session["jobskyerID"] + "')";
         SqlCommand mycom = new SqlCommand(sqlstr, myCon);
         mycom.Parameters.Add("n", n);
         SqlDataAdapter da = new SqlDataAdapter(mycom);
@@ -86,16 +89,46 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
     public string GetJobName(object jobskyerID)             //把jobskyerID转化为jobName输出
     {
         DB db = new DB();
-        SqlDataReader dr = db.reDr("SELECT jobName FROM JOBSKYER WHERE jobskyerID='" + jobskyerID + "'");
+        SqlDataReader dr = db.reDr("SELECT jobName FROM jobskyer WHERE jobskyerID='" + jobskyerID + "'");
         dr.Read();
         return dr.GetValue(0).ToString();
+    }
+    public string GetState0(object flag0)
+    {
+        string state;
+        if (flag0.ToString() == "0")
+        {
+            state = "准时";
+        }
+        else
+        {
+            state = "迟到";
+        }
+        return state;
+    }
+    public string GetState1(object flag1)
+    {
+        string state;
+        if (flag1.ToString().Trim() == "0")
+        {
+            state = "准时";
+        }
+        else if (flag1.ToString().Trim() == "1")
+        {
+            state = "早退";
+        }
+        else
+        {
+            state = "未签退";
+        }
+        return state;
     }
     private void ShowButton()
     {
         int flag = 0;//用flag标记用户的当前状态，0：未值班期间，1：值班期间
         DB db = new DB();
         DateTime nowTime = DateTime.Now;
-        string sqlstr = "SELECT * FROM DUTY_TIME;SELECT * FROM MY_DUTY_TIME;SELECT jobskyerID,jobName FROM JOBSKYER";
+        string sqlstr = "SELECT * FROM dutyTimeTable;SELECT * FROM myDutyTime;SELECT jobskyerID,jobName FROM jobskyer";
         DataSet ds = db.reDt(sqlstr).DataSet;
         DateTime dutyInTime=new DateTime();
         DateTime dutyOutTime=new DateTime();
@@ -107,15 +140,16 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
             for(int i=0;i<ds.Tables[1].Rows.Count;i++)
             {
                 //当天有值班人为当前用户的未签退记录
-                if(ds.Tables[1].Rows[i]["jobskyerID"].ToString().Trim()==Session["jobskyerID"].ToString().Trim()&&ds.Tables[1].Rows[i]["flag2"].ToString()=="2"&&Convert.ToDateTime(ds.Tables[1].Rows[i]["dutyInTime"]).ToShortDateString()==nowTime.ToShortDateString())
+                if(ds.Tables[1].Rows[i]["jobskyerID"].ToString().Trim()==Session["jobskyerID"].ToString().Trim()&&ds.Tables[1].Rows[i]["flag1"].ToString()=="2"&&Convert.ToDateTime(ds.Tables[1].Rows[i]["dutyInTime"]).ToShortDateString()==nowTime.ToShortDateString())
                 {
                     //查找被值班人的理论签退时间
                     //Response.Write("...");
                     for (int j = 0; j < ds.Tables[0].Rows.Count;j++ )
                     {
                         //找到
-                        if (ds.Tables[0].Rows[j]["jobskyerID"].ToString().Trim() == ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim() && Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyOutTime"]).ToShortDateString() == nowTime.ToShortDateString())
+                        if (ds.Tables[0].Rows[j]["jobskyerID"].ToString().Trim() == ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim() && Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyOutTime"]).DayOfWeek == nowTime.DayOfWeek)
                         {
+                            //Response.Write("...");
                             flag = 1;
                             Session["dutyRecordID"] = ds.Tables[1].Rows[i]["dutyRecordID"].ToString();
                             dutyOutTime = Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyOutTime"].ToString());
@@ -139,6 +173,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                                     //Response.Write(Session["toJobName"]);
                                     Session["toJobskyerID"] = ds.Tables[1].Rows[i]["toJobskyerID"].ToString();
                                     //ImgbtnSignOut.ImageUrl="~/Image/Sign/SignOutTo.PNG";
+                                    Response.Write("...");
                                     ImgbtnSignIn.Visible = true;
                                     ImgbtnSignIn.Enabled = true;
                                     lblMessage.Visible = true;
@@ -158,7 +193,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                             
                         }
                             //如果在值班期间，显示值班提示信息
-                        else if(dutyOutTime.DayOfWeek==nowTime.DayOfWeek&&differOfTime(nowTime,dutyInTime)>60&&differOfTime(dutyOutTime,nowTime)>30)
+                        else if(dutyOutTime.DayOfWeek==nowTime.DayOfWeek&&differOfTime(nowTime,dutyInTime)>-30&&differOfTime(dutyOutTime,nowTime)>30)
                         {
                             
                             for (int k = 0; k < ds.Tables[2].Rows.Count; k++)
@@ -170,7 +205,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                                     if (Session["jobskyerID"].ToString().Trim() == ds.Tables[1].Rows[i]["toJobskyerID"].ToString().Trim())
                                     {
                                         
-                                        flag = 1;
+                                        //flag = 1;
                                         lblMessage.Visible = true;
                                         lblMessage.Text =  Session["jobName"].ToString()+ "正在值班,未到签退时间";
                                         DLSignInTo.Visible = false;
@@ -179,7 +214,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                                     }
                                     else
                                     {
-                                        flag = 1;
+                                        //flag = 1;
                                         lblMessage.Visible = true;
                                         ImgbtnSignIn.Enabled = false;
                                         ImgbtnSignIn.Visible = false;
@@ -223,7 +258,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                             //检查当天是否已值班（被代班）
                             if (Convert.ToDateTime(ds.Tables[1].Rows[j]["dutyInTime"].ToString()).DayOfWeek == nowTime.DayOfWeek && ds.Tables[1].Rows[j]["jobskyerID"].ToString() != Session["jobskyerID"].ToString() && ds.Tables[1].Rows[j]["toJobskyerID"].ToString() == Session["jobskyerID"].ToString() && nowTime.DayOfWeek.ToString() == Convert.ToDateTime(ds.Tables[0].Rows[i]["dutyInTime"]).DayOfWeek.ToString() && ds.Tables[1].Rows[j]["flag2"].ToString() == "2")
                             {
-                                SqlDataReader dr = db.reDr("SELECT jobName FROM JOBSKYER WHERE jobskyerID='" + ds.Tables[1].Rows[j]["jobskyerID"] + "'"); //and dutyInTime='"+nowTime.ToString()+"'");
+                                SqlDataReader dr = db.reDr("SELECT jobName FROM jobskyer WHERE jobskyerID='" + ds.Tables[1].Rows[j]["jobskyerID"] + "'"); //and dutyInTime='"+nowTime.ToString()+"'");
                                 dr.Read();
                                 lblMessage.Visible = true;
                                 lblMessage.Text = "正在被" + dr.GetValue(0) + "代班";
@@ -239,6 +274,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                                 if (dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) <= 30 && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) >= -60)
                                 {
                                     flag = 1;
+                                    lblMessage.Visible = false;
                                     ImgbtnSignIn.Enabled = true;
                                     ImgbtnSignIn.Visible = true;
                                     ImgbtnSignIn.ImageUrl = "~/Image/Sign/SignIn.PNG";//不必要
@@ -254,6 +290,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                         if (dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) <= 30 && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) >= -60)
                         {
                             flag = 1;
+                            lblMessage.Visible = false;
                             ImgbtnSignIn.Enabled = true;
                             ImgbtnSignIn.Visible = true;
                             ImgbtnSignIn.ImageUrl = "~/Image/Sign/SignIn.PNG";//不必要
@@ -266,26 +303,20 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         //代班签到
         if(ds.Tables[0].Rows.Count>0&&ds.Tables[2].Rows.Count>0&&flag==0)
         {
+            
             DLSignInTo.Items.Clear();
             DLSignInTo.Items.Add(new ListItem("请选择被代班人："));
             for(int i=0;i<ds.Tables[0].Rows.Count;i++)
             {
                 dutyInTime = Convert.ToDateTime(ds.Tables[0].Rows[i]["dutyInTime"].ToString().Trim());
+                
                 //不是我的值班时间
                 if (ds.Tables[0].Rows[i]["jobskyerID"].ToString().Trim()!= Session["jobskyerID"].ToString().Trim() && differOfTime(dutyInTime, nowTime) <= 30 && differOfTime(dutyInTime, nowTime) >= -60 && Convert.ToDateTime(ds.Tables[0].Rows[i]["dutyInTime"].ToString().Trim()).DayOfWeek == nowTime.DayOfWeek)
                 {
-                    for(int j=0;j<ds.Tables[1].Rows.Count;j++)
+                    if (ds.Tables[1].Rows.Count==0)
                     {
-                        //如果在值班当天记录里找到此班次，则不加入下拉框(判断被代班人员ID,而不是值班人员ID)
-                        if(ds.Tables[1].Rows[j]["toJobskyerID"].ToString()==ds.Tables[0].Rows[i]["jobskyerID"].ToString().Trim()&&Convert.ToDateTime(ds.Tables[1].Rows[j]["dutyInTime"].ToString().Trim()).DayOfWeek==nowTime.DayOfWeek)
-                        {
-                            break;
-                        }
-                         //如果没有找到该班次值班记录，判断当前时间是否在签到范围内，若是，放进下拉列表，可见
-                         //当查找到最后一条记录或者下一条记录非当天，则加入下拉列表中
-                        else if (j+1==ds.Tables[1].Rows.Count)//|| Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyInTime"].ToString()).DayOfWeek!=nowTime.DayOfWeek)
-                        {
-                            DLSignInTo.Visible = true;
+                        DLSignInTo.Visible = true;
+                        //lblMessage.Visible = true;
                             DLSignInTo.Enabled = true;
                             ImgbtnSignIn.Enabled = true;
                             ImgbtnSignIn.Visible = true;
@@ -299,8 +330,39 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                                     DLSignInTo.Items.Add(new ListItem(ds.Tables[2].Rows[k]["jobName"].ToString().Trim()));
                                 }
                             }
+                    }
+                    else
+                    {
+                        for (int j = 0; j < ds.Tables[1].Rows.Count; j++)
+                        {
+                            //如果在值班当天记录里找到此班次，则不加入下拉框(判断被代班人员ID,而不是值班人员ID)
+                            if (ds.Tables[1].Rows[j]["toJobskyerID"].ToString() == ds.Tables[0].Rows[i]["jobskyerID"].ToString().Trim() && Convert.ToDateTime(ds.Tables[1].Rows[j]["dutyInTime"].ToString().Trim()).DayOfWeek == nowTime.DayOfWeek)
+                            {
+                                break;
+                            }
+                            //如果没有找到该班次值班记录，判断当前时间是否在签到范围内，若是，放进下拉列表，可见
+                            //当查找到最后一条记录或者下一条记录非当天，则加入下拉列表中
+                            else if (j + 1 == ds.Tables[1].Rows.Count)//|| Convert.ToDateTime(ds.Tables[0].Rows[j]["dutyInTime"].ToString()).DayOfWeek!=nowTime.DayOfWeek)
+                            {
+                                DLSignInTo.Visible = true ;
+                                DLSignInTo.Enabled = true;
+                                lblMessage.Visible = false;
+                                ImgbtnSignIn.Enabled = true;
+                                ImgbtnSignIn.Visible = true;
+                                //ImgbtnSignOut.ImageUrl = "~/Image/Sign/SignOutTo.PNG";
+                                ImgbtnSignIn.ImageUrl = "~/Image/Sign/SignInTo.PNG";
+                                Session["toJobskyerID"] = ds.Tables[0].Rows[i]["jobskyerID"];
+                                for (int k = 0; k < ds.Tables[2].Rows.Count; k++)
+                                {
+                                    if (Session["toJobskyerID"].ToString() == ds.Tables[2].Rows[k]["jobskyerID"].ToString())
+                                    {
+                                        DLSignInTo.Items.Add(new ListItem(ds.Tables[2].Rows[k]["jobName"].ToString().Trim()));
+                                    }
+                                }
+                            }
                         }
                     }
+                    
                 }
             }
         }
@@ -308,8 +370,12 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
     private int differOfTime(DateTime dateT1,DateTime dateT2)
     {
         //计算两时间差
-        TimeSpan ts1 = new TimeSpan(dateT1.Ticks);
-        TimeSpan ts2 = new TimeSpan(dateT2.Ticks);
+        DateTime t1 = new DateTime();
+        DateTime t2 = new DateTime();
+        t1 = Convert.ToDateTime(dateT1.ToLongTimeString());
+        t2 = Convert.ToDateTime(dateT2.ToLongTimeString());
+        TimeSpan ts1 = new TimeSpan(t1.Ticks);
+        TimeSpan ts2 = new TimeSpan(t2.Ticks);
         int differ=Convert.ToInt32(ts1.Subtract(ts2).TotalMinutes);
         return differ;
     }
@@ -322,29 +388,29 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
             try
             {
 
-                string dutyInTimeSql = "SELECT dutyInTime FROM DUTY_TIME WHERE jobskyerID='" + Session["jobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
+                string dutyInTimeSql = "SELECT dutyInTime FROM dutyTimeTable WHERE jobskyerID='" + Session["jobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
                 SqlDataReader dutyInTimeDr = db.reDr(dutyInTimeSql);
                 dutyInTimeDr.Read();
                 if(dutyInTimeDr.GetValue(0).ToString()!=null)
                 {          
-                    int flag1=0;
+                    int flag0=0;
                     DateTime dutyInTime = Convert.ToDateTime(dutyInTimeDr.GetValue(0).ToString());
                     if (dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) >= 0 && dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime)<=30)
                     {
-                        flag1=0;
+                        flag0=0;
                        
                     }
                     else if (differOfTime(Convert.ToDateTime(dutyInTime), nowTime) < 0 && dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime)>=-60)
                     {
-                        flag1=1;
+                        flag0=1;
                     }
-                    string recordInsert = "INSERT INTO MY_DUTY_TIME(jobskyerID,dutyInTime,flag1,toJobskyerID) values('" + Session["jobskyerID"] + "','" + nowTime.ToString() + "','" + flag1 + "','" + Session["jobskyerID"] + "')";
+                    string recordInsert = "INSERT INTO myDutyTime(jobskyerID,dutyInTime,flag0,toJobskyerID) values('" + Session["jobskyerID"] + "','" + nowTime.ToString() + "','" + flag0 + "','" + Session["jobskyerID"] + "')";
                     Session["dutyInTime"] = nowTime.ToString();
                     if(db.SqlEX(recordInsert)==1)
                     {
                         Response.Write("<script>alert('签到成功')</script>");
                         lblMessage.Visible = true;
-                        //lblMessage.Text = Session["jobName"] + "正在值班...";
+                        lblMessage.Text = Session["jobName"] + "正在值班...";
                         //flag = 1;
                     }
                     else
@@ -353,6 +419,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                         lblMessage.Text="签到失败！";
                     }
                 }
+                dutyInTimeDr.Close();
                 
             }
             catch
@@ -377,36 +444,41 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                 try
             {
                 Session["toJobName"] = DLSignInTo.SelectedValue.ToString();
-                SqlDataReader toJobId = db.reDr("SELECT JobskyerID FROM JOBSKYER WHERE jobName='" + Session["toJobName"] + "'");
+                SqlDataReader toJobId = db.reDr("SELECT JobskyerID FROM jobskyer WHERE jobName='" + Session["toJobName"] + "'");
                 toJobId.Read();
                 if (toJobId.HasRows)
                 {
                     Session["toJobskyerID"] = toJobId.GetValue(0).ToString();
                 }
-                string dutyInTimeSql = "SELECT dutyInTime FROM DUTY_TIME WHERE jobskyerID='" + Session["toJobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
+                string dutyInTimeSql = "SELECT dutyInTime FROM dutyTimeTable WHERE jobskyerID='" + Session["toJobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
                 SqlDataReader dutyInTimeDr = db.reDr(dutyInTimeSql);
                 dutyInTimeDr.Read();
                 if (dutyInTimeDr.GetValue(0).ToString() != null)
                 {
-                    int flag1 = 0;
+                    int flag0 = 0;
                     DateTime dutyInTime = Convert.ToDateTime(dutyInTimeDr.GetValue(0).ToString());
                     if (dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) >= 0 && dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) <= 30)
                     {
                         //准时签到
-                        flag1 = 0;
+                        flag0 = 0;
 
                     }
                     else if (differOfTime(Convert.ToDateTime(dutyInTime), nowTime) < 0 && dutyInTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyInTime), nowTime) >= -60)
                     {
                         //迟到
-                        flag1 = 1;
+                        flag0 = 1;
                     }
-                    string recordInsert = "INSERT INTO MY_DUTY_TIME(jobskyerID,dutyInTime,flag1,toJobskyerID) values('" + Session["jobskyerID"] + "','" + nowTime.ToString() + "','" + flag1 + "','" + Session["toJobskyerID"] + "')";
+                    string recordInsert = "INSERT INTO myDutyTime(jobskyerID,dutyInTime,flag0,toJobskyerID) values('" + Session["jobskyerID"] + "','" + nowTime.ToString() + "','" + flag0 + "','" + Session["toJobskyerID"] + "')";
                     Session["dutyInTime"] = nowTime.ToString();
                     if (db.SqlEX(recordInsert) == 1)
                     {
                         //签到成功
-                        
+                        DLSignInTo.Visible = false;
+                        DLSignInTo.Enabled = false;
+                        ImgbtnSignIn.Visible = false;
+                        ImgbtnSignIn.Enabled = false;
+                        lblMessage.Visible = true;
+                        lblMessage.Text = Session["jobName"] + "给" + DLSignInTo.SelectedValue.ToString() + "代班签到成功";
                         Response.Write("<script>alert('" + Session["jobName"] + "给" + DLSignInTo.SelectedValue.ToString() + "代班签到成功')</script>");
                         //flag = 1;
                     }
@@ -416,7 +488,9 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                         lblMessage.Text = "签到失败！";
                     }
                 }
-
+                toJobId.Close();
+                dutyInTimeDr.Close();
+                
             }
             catch
             {
@@ -434,30 +508,31 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         {
             try
             {
-                string dutyOutTimeSql = "SELECT dutyOutTime FROM DUTY_TIME WHERE jobskyerID='" + Session["jobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
+                string dutyOutTimeSql = "SELECT dutyOutTime FROM dutyTimeTable WHERE jobskyerID='" + Session["jobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
                 SqlDataReader dutyOutTimeDr = db.reDr(dutyOutTimeSql);
                 dutyOutTimeDr.Read();
                 if (dutyOutTimeDr.GetValue(0).ToString() != null)
                 {
                     //flag2  2:未签退 0：按时签退 1：早退
-                    int flag2 = 2;
+                    int flag1 = 2;
                     DateTime dutyOutTime = Convert.ToDateTime(dutyOutTimeDr.GetValue(0).ToString());
                     if (dutyOutTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) <= 0 && dutyOutTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) >= -60)
                     {
-                        flag2 = 0;
+                        flag1 = 0;
                     }
                     else if (differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) < 30 && dutyOutTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) > 0)
                     {
-                        flag2 = 1;
+                        flag1 = 1;
                     }
-                    string recordUpdate1 = "UPDATE MY_DUTY_TIME set flag2='" + flag2 + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
-                    string recordUpdate2 = "UPDATE MY_DUTY_TIME set dutyOutTime='" + nowTime.ToString() + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
+                    string recordUpdate1 = "UPDATE myDutyTime set flag1='" + flag1 + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
+                    string recordUpdate2 = "UPDATE myDutyTime set dutyOutTime='" + nowTime.ToString() + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
                     if (db.SqlEX(recordUpdate2) == 1 && db.SqlEX(recordUpdate1) == 1)
                     {
                         lblMessage.Visible = true;
                         //Response.Write(dutyRecordID);
                         lblMessage.Text = Session["jobName"] + "签退成功";
-                        //ImgbtnSignOut.Enabled = false;
+                        ImgbtnSignIn.Enabled = false;
+                        ImgbtnSignIn.Visible = false;
                         //flag = 0;
                     }
                     else
@@ -470,6 +545,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                 {
                     Response.Write("未读取到数据");
                 }
+                dutyOutTimeDr.Close();
                 ShowButton();
             }
             catch
@@ -486,7 +562,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         {
             try
             {
-                string dutyOutTimeSql = "SELECT dutyOutTime FROM DUTY_TIME WHERE jobskyerID='" + Session["toJobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
+                string dutyOutTimeSql = "SELECT dutyOutTime FROM dutyTimeTable WHERE jobskyerID='" + Session["toJobskyerID"] + "'";//and dutyInTime='"+nowTime.ToString()+"'";
                 SqlDataReader dutyOutTimeDr = db.reDr(dutyOutTimeSql);
                 dutyOutTimeDr.Read();
                 //string dutyOutTimeDr = db.reDr(dutyOutTimeSql).ToString();
@@ -495,21 +571,21 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                 //Response.Write(dutyOutTimeDr.GetValue(0).ToString());
                 if (dutyOutTimeDr.HasRows)
                 {
-                    int flag2 = 2;
+                    int flag1 = 2;
                     //DateTime dutyOutTime = Convert.ToDateTime(dutyOutTimeDr);
                     DateTime dutyOutTime = Convert.ToDateTime(dutyOutTimeDr.GetValue(0).ToString());
                     if (dutyOutTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) <= 0 && dutyOutTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) >= -60)
                     {
-                        flag2 = 0;
+                        flag1 = 0;
 
                     }
                     else if (differOfTime(Convert.ToDateTime(dutyOutTime), nowTime) <= 30 && dutyOutTime.DayOfWeek == nowTime.DayOfWeek && differOfTime(nowTime,Convert.ToDateTime(dutyOutTime)) < 60)
                     {
-                        flag2 = 1;
+                        flag1 = 1;
                     }
                     //Response.Write(Convert.ToDateTime(dutyOutTime).ToString());
-                    string recordUpdate1 = "UPDATE MY_DUTY_TIME set flag2='" + flag2 + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
-                    string recordUpdate2 = "UPDATE MY_DUTY_TIME set dutyOutTime='" + nowTime.ToString() + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
+                    string recordUpdate1 = "UPDATE myDutyTime set flag2='" + flag1 + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
+                    string recordUpdate2 = "UPDATE myDutyTime set dutyOutTime='" + nowTime.ToString() + "' WHERE jobskyerID='" + Session["jobskyerID"] + "'and dutyRecordID='" + Session["dutyRecordID"] + "'";
 
                     if (db.SqlEX(recordUpdate1) == 1 && db.SqlEX(recordUpdate2) == 1)
                     {
@@ -527,6 +603,7 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
                 {
                     Response.Write("未读取到数据");
                 }
+                dutyOutTimeDr.Close();
 
             }
             catch
@@ -549,6 +626,8 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
     {
         if (lbCount.Text.ToString()=="1"||lbCount.Text.ToString()=="0")  //仅一页或无信息
         {
+            lbtnGo.Enabled = false;
+            DropDownList1.SelectedValue = "1";
             lbCount.Text = "1";
             lbtnFirst.Enabled = false;
             lbtnUp.Enabled = false;
