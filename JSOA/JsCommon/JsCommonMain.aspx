@@ -1,11 +1,12 @@
-<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JsCommonMain.aspx.cs" Inherits="JsCommon_JsCommonMain" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JsCommonMain.aspx.cs" Inherits="JsCommon_JsCommonMain" %>
 <%@ MasterType VirtualPath="~/MasterPage.master" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="Main_ContentPlaceHolder" Runat="Server">
     <div style="height: 503px" >
     <div class="JCM_left">
-        <div class="JCM_pro"><asp:ImageButton ID="ImgbtnProfile" runat="server" Height="226px" Width="220px"/></div>
+        
+        <div class="JCM_pro"><a href="../Image/JsCommonMain/Business.jpg"><img src="../Image/JsCommonMain/Business.jpg" id="ImgProfile" style="width:300px;height:300px;"/></a></div>
         <div class="JCM_info">姓名：<asp:Label ID="lblName" runat="server" Text="Name"></asp:Label></div>
         <div class="JCM_info">院系：<asp:Label ID="lblAcademy" runat="server" Text="Academy"></asp:Label></div>
         <div class="JCM_info">组别：<asp:Label ID="lblPosition" runat="server" Text="Position"></asp:Label></div>
@@ -33,3 +34,4 @@
         </div>
 </div>
 </asp:Content>
+

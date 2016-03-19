@@ -21,9 +21,11 @@
             <h4 style="margin-top:35px;margin-left:179px;position:absolute;"">毕业生就业指导服务中心</h4>
             <h6 style="position:absolute;margin-top:60px;margin-left:30px;">THE STUDENT CAREER CENTER OF CENTRAL SOUTH UNIVERSITY</h6>
         </div>
-        <div style="width:50px;float:right;margin-right:100px;">
+        <div style="width:50px;margin-top:5px;float:right;margin-right:50px;">
             <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="退出登录" />
-        </div>
+        </div> 
+        <a href="../Gallery/Gallery.html"><div style="font-family:YouYuan;margin-top:5px;width:150px; float:right;margin-right:20px;color:#ffffff;">来一睹大家的风采吧 <*>_<*> Click Me!</div></a>
+
         <div class="top_bottom">
             <asp:ImageButton ID="Main_ImgBtn" runat="server" OnClick="Main_ImgBtn_Click" ImageUrl="~/Image/Button/Main-01.png" />
             <asp:ImageButton ID="SignIn_ImgBtn" runat="server" OnClick="SignIn_ImgBtn_Click" ImageUrl="~/Image/Button/Sign-01.png" />
