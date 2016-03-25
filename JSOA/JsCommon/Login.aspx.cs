@@ -11,20 +11,24 @@ using System.Data;
 
 public partial class JsCommon_Login : System.Web.UI.Page
 {
+    //string jobRole = "3";
+    public static int role = 3;
     protected void Page_Load(object sender, EventArgs e)
     {
         lblFailText.Visible = false;
         lblUser.Visible = false;
         lblPwd.Visible = false;
+        this.Common.ImageUrl = "../Image/Login/Common.png";
+        this.Manage.ImageUrl = "../Image/Login/Manage.png";
         if (!IsPostBack)
         {
-
+            
         }
+        //Response.Write(jobRole);
     }
 
     //登录按钮
-    protected void btnLogin_Click1(object sender, ImageClickEventArgs e)
-
+    protected void btnLogin_Click(object sender, ImageClickEventArgs e)
     {
         lblFailText.Visible = false;
         if (String.IsNullOrEmpty(UserName.Text))
@@ -53,6 +57,9 @@ public partial class JsCommon_Login : System.Web.UI.Page
             DB db = new DB();
             string jobskyerID = this.UserName.Text.Trim();
             string passWord = this.Password.Text.Trim();
+            //string role = "0";
+            //role = jobRole.ToString();
+            //Response.Write(role);
             try
             {
                 DataTable dt = db.reDt("select jobskyerID,password,jobRole,jobName from jobskyer");
@@ -67,21 +74,47 @@ public partial class JsCommon_Login : System.Web.UI.Page
                         string jobName = dt.Rows[i]["jobName"].ToString();
                         if (Session["jobRole"].ToString() == "0")
                         {
-                            Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + ""); //跳转至一般用户界面，并传递参数，登录人员名称
+                            if (role.ToString() == "1")
+                            {
+                                //this.lblFailText.Text = "请以正确身份登录";
+                                Response.Redirect("~/JsCommon/Login.aspx");
+                                //this.lblFailText.Visible = true;
+                            }
+                            else if (role.ToString() == "0")
+                            {
+                                Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + ""); //跳转至一般用户界面，并传递参数，登录人员名称
+                            }
+                            else
+                            {
+                                Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + "");
+                                //lblFailText.Text = "请选择角色身份";
+                                //this.lblFailText.Visible = true;
+                            }
                         }
                         else if (Session["jobRole"].ToString() == "1")
                         {
-                            Response.Redirect("~/JsManagerMain.aspx?Name=" + jobName + "");  //跳转至管理人员界面
+                            if (role.ToString() == "1")
+                            {
+                                //Response.Write("管理员");
+                                Response.Redirect("~/JsManager/DutyRecord.aspx?Name=" + jobName + "");  //跳转至管理人员界面
+                            }
+                            else if (role.ToString() == "0")
+                            {
+                                //Response.Write("普通用户");
+                                Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + "");  //跳转至超级用户界面
+                            }
+                            else
+                            {
+                                //lblFailText.Text = "请选择角色身份";
+                                //lblFailText.Visible = true;
+                                Response.Redirect("~/JsCommon/Login.aspx");
+                            }
                         }
-                        else if (Session["jobRole"].ToString() == "2")
-                        {
-                            Response.Redirect("~/JsSuperMain.aspx?Name=" + jobName + "");  //跳转至超级用户界面
-                        }
-                        //break;
                     }
                     else if (i == dt.Rows.Count - 1)
                     {
                         lblFailText.Visible = true;
+                        lblFailText.Text = "用户名或密码错误";
                     }
                 }
             }
@@ -95,4 +128,18 @@ public partial class JsCommon_Login : System.Web.UI.Page
             }
         }
     }
+    protected void Manage_Click(object sender, ImageClickEventArgs e)
+    {
+        this.Common.ImageUrl = "../Image/Login/Common.png";
+        this.Manage.ImageUrl = "../Image/Login/Manage-01.png";
+        role = 1;
+    }
+
+    protected void Common_Click(object sender, ImageClickEventArgs e)
+    {
+        this.Common.ImageUrl = "../Image/Login/Common-01.png";
+        this.Manage.ImageUrl = "../Image/Login/Manage.png";
+        role = 0;
+    }
+    
 }

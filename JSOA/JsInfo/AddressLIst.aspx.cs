@@ -21,7 +21,7 @@ public partial class JsInfo_AddressLIst : System.Web.UI.Page
     {
         DB db = new DB();
         SqlConnection con = new SqlConnection();
-        string Office_sqlstr = "SELECT jobName, jobContact  FROM JOBSKYER WHERE jobPosition = '办公室'";
+        string Office_sqlstr = "SELECT jobName, jobPhone  FROM jobskyer WHERE jobPosition = '办公室'";
         con = db.GetCon();
         con.Open();
         SqlCommand com_Office = new SqlCommand(Office_sqlstr, con);
@@ -46,7 +46,7 @@ public partial class JsInfo_AddressLIst : System.Web.UI.Page
     {
         DB db = new DB();
         SqlConnection con = new SqlConnection();
-        string SoftWare_sqlstr = "SELECT jobName, jobContact  FROM JOBSKYER WHERE jobPosition = '程序组'";
+        string SoftWare_sqlstr = "SELECT jobName, jobPhone  FROM jobskyer WHERE jobPosition = '程序组'";
         con = db.GetCon();
         con.Open();
         SqlCommand com_SoftWare = new SqlCommand(SoftWare_sqlstr, con);
@@ -71,7 +71,7 @@ public partial class JsInfo_AddressLIst : System.Web.UI.Page
     {
         DB db = new DB();
         SqlConnection con = new SqlConnection();
-        string Internet_sqlstr = "SELECT jobName, jobContact  FROM JOBSKYER WHERE jobPosition = '网络组'";
+        string Internet_sqlstr = "SELECT jobName, jobPhone  FROM jobskyer WHERE jobPosition = '网络组'";
         con = db.GetCon();
         con.Open();
         SqlCommand com_Internet = new SqlCommand(Internet_sqlstr, con);
@@ -96,7 +96,7 @@ public partial class JsInfo_AddressLIst : System.Web.UI.Page
     {
         DB db = new DB();
         SqlConnection con = new SqlConnection();
-        string Art_sqlstr = "SELECT jobName, jobContact  FROM JOBSKYER WHERE jobPosition = '美工组'";
+        string Art_sqlstr = "SELECT jobName, jobPhone  FROM jobskyer WHERE jobPosition = '美工组'";
         con = db.GetCon();
         con.Open();
         SqlCommand com_Art = new SqlCommand(Art_sqlstr, con);
@@ -121,7 +121,7 @@ public partial class JsInfo_AddressLIst : System.Web.UI.Page
     {
         DB db = new DB();
         SqlConnection con = new SqlConnection();
-        string Report_sqlstr = "SELECT jobName, jobContact  FROM JOBSKYER WHERE jobPosition = '记者团'";
+        string Report_sqlstr = "SELECT jobName, jobPhone  FROM jobskyer WHERE jobPosition = '记者团'";
         con = db.GetCon();
         con.Open();
         SqlCommand com_Report = new SqlCommand(Report_sqlstr, con);

@@ -22,7 +22,6 @@ public partial class JsCommon_SignInAndOut : System.Web.UI.Page
         
         if(!IsPostBack)
         {
-            this.Master.btnSign.ImageUrl = "~/Image/Button/Sign.PNG";
             //判断Button显示与否
             ImgbtnSignIn.Enabled = false;
             ImgbtnSignIn.Visible = false;

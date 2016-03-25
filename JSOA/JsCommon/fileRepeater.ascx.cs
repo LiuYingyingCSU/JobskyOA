@@ -68,7 +68,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
     {
         DateTime nowTime = DateTime.Now;
         string strFileName = fileUp.FileName;
-        //string filePath = Server.MapPath("../File/Program/") + strFileName;
+        //string filePath = "~/Change/Picture/" + strFileName;
         string filePath = Server.MapPath(path) + strFileName;
         string sqlFU = "INSERT INTO files (fileName,jobskyerID,fileGroup,fileUpTime,filePath) values('" + strFileName + "','" + Session["jobskyerID"] + "','" + fileGroup.ToString() + "','" + nowTime.ToString() + "','" + strFileName + "')";
         isUpload = db.SqlEX(sqlFU);

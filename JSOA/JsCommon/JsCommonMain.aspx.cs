@@ -10,15 +10,27 @@ using System.Data;
 
 public partial class JsCommon_JsCommonMain : System.Web.UI.Page
 {
+    public string imageUrl = "../Image/JsCommonMain/Business.jpg";
     protected void Page_Load(object sender, EventArgs e)
     {
+        DB db = new DB();
         rptBind();
         if(!IsPostBack)
         {
-            this.Master.btnMain.ImageUrl = "~/Image/Button/Main.PNG";
+            SqlDataReader dr0 = db.reDr("select jobImage from jobskyer where jobskyerID='" + Session["jobskyerID"] + "'");
+            dr0.Read();
+            if (dr0.HasRows)
+            {
+                imageUrl = "../Change/Picture/"+dr0["jobImage"].ToString();
+            }
+            else
+            {
+                imageUrl = "../Image/JsCommonMain/Business.jpg";
+            }
+            dr0.Close();
         }
         //判断用户是否已登录
-         DB db = new DB();
+         
          string jobName = HttpContext.Current.User.Identity.Name;
         if(HttpContext.Current.User.Identity.Name==""||HttpContext.Current.User.Identity.Name==null)
         {
@@ -58,14 +70,12 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             }
         }
 
-        string imgUrl;
-        //imgUrl=           默认头像
-        //jobskyerID = Session["jobskyerID"].ToString();
-        SqlDataReader dr2 = db.reDr("SELECT jobImage FROM jobskyer WHERE jobName='" +jobName + "'");
-        dr2.Read();
-        imgUrl = dr2.GetValue(0).ToString().Trim();
-        dr2.Dispose();
-        dr2.Close();
+        //string imgUrl;
+        //SqlDataReader dr2 = db.reDr("SELECT jobImage FROM jobskyer WHERE jobName='" +jobName + "'");
+        //dr2.Read();
+        //imgUrl = "../Change/Picture/"+dr2.GetValue(0).ToString().Trim();
+        //dr2.Dispose();
+        //dr2.Close();
     }
 
     public string GetJobName(object jobskyerID)             //把jobskyerID转化为jobName输出
