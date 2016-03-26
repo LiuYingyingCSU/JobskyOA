@@ -1,0 +1,19 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JsInfo_Master.master.cs" Inherits="JsInfo_JsInfo_Master" %>
+
+<asp:Content ID="JsInfo_Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+
+<asp:Content ID="JsInfo_Content2" ContentPlaceHolderID="Main_ContentPlaceHolder" Runat="Server">
+    <div style="margin-left:393px">
+        <asp:ImageButton ID="DutyTable_ImgBtn" runat="server" />&nbsp;
+        <asp:ImageButton ID="AddressList_ImgBtn" runat="server" />&nbsp;
+        <asp:ImageButton ID="JsRule_ImgBtn" runat="server" />
+    </div>
+    <br /><br />
+    <div>
+        <asp:ContentPlaceHolder ID="JsInfo_ContentPlaceHolder" runat="server">
+
+        </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
+
