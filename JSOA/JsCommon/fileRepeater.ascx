@@ -52,8 +52,8 @@
                 &nbsp;<asp:LinkButton ID="lbtnLast" runat="server" onclick="lbtnLast_Click" ForeColor="White">尾页</asp:LinkButton> 
                 &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" Width="80px">
                 </asp:DropDownList> 
-                <asp:LinkButton ID="lbtnGo" runat="server"  BackColor="LightBlue"
-                BorderWidth="0px" BorderColor="Blue" onclick="lbtnGo_Click" style="width: 20px">Go</asp:LinkButton>
+                <asp:LinkButton ID="lbtnGo" runat="server"  BackColor="Black"
+                BorderWidth="0px" BorderColor="White" onclick="lbtnGo_Click" style="width: 20px" ForeColor="White">Go</asp:LinkButton>
                     </div>
             </div>
         </div>

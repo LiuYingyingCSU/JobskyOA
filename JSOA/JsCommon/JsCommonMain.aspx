@@ -13,7 +13,7 @@
         <div class="JCM_info">组别：<asp:Label ID="lblPosition" runat="server" Text="Position"></asp:Label></div>
     </div>
     <div class="JCM_right">
-        <div>近日公告</div>
+        <div style="color:#ffffff;font-family:KaiTi;">近日公告</div>
         <div class="notice">
             <asp:Repeater ID="Repeater1" runat="server">
                 <ItemTemplate>
