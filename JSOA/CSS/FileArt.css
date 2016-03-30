@@ -10,8 +10,8 @@
     margin: 0px auto;
     font-family:KaiTi;
     font-size:20px;
-    border-bottom:solid 2px #000000;
-    border-right:solid 2px #000000;
+    border-bottom:solid 2px rgba(0, 0, 0, 0.80);
+    border-right:solid 2px rgba(0, 0, 0, 0.80);
 }
 .fName{
     text-align:center;
@@ -33,7 +33,7 @@
     line-height:0px;
     height:44px;
     color:#f7ede0;
-    background-color:#000000;
+    background-color:rgba(0, 0, 0, 0.80);
     margin:20px auto;
     margin-bottom:0px;
     border-top-left-radius:10px;
@@ -47,7 +47,7 @@
     line-height:0px;
     height:250px;
     margin:0 auto;
-    border-left:solid 2px #000000;
+    border-left:solid 2px rgba(0, 0, 0, 0.80);
 }
 .bottom
 {
@@ -55,7 +55,7 @@
     height:35px;
     margin:2px auto;
     color:#f7ede0;
-    background-color:#000000;
+    background-color:rgba(0, 0, 0, 0.80);
     font-family:KaiTi;
     font-size:18px;
     line-height:28px;

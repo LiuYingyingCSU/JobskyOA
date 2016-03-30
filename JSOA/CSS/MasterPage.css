@@ -22,10 +22,13 @@
     height:60px;
     margin-top:44px;
     margin-left:520px;
-    display:table-cell;
     position:absolute;
 }
-
+.top_bottom img{
+    display:block;
+    float:left;
+    margin-bottom:0;
+}
 .bar_bottom
 {
     width:100%;
@@ -41,7 +44,7 @@
     left:50%;
     margin-top:40px;
     margin-left:-40%;
-    background-color:rgba(33, 34, 36, 0.81);
+    background-color:rgba(0, 0, 0, 0.60);
     border-radius:20px;
     position:absolute
 }
