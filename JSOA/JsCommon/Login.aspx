@@ -13,17 +13,17 @@
     <form id="form1" runat="server">
         <div class="login">
             <div >  
-                <asp:ImageButton ID="Manage" runat="server" ImageUrl="~/Image/Login/Manage.PNG" OnClick="Manage_Click" />
+                <asp:ImageButton ID="Manage" runat="server" ImageUrl="~/Image/Login/Manage.PNG" OnClick="Manage_Click" CssClass="bordr"/>
                 <asp:ImageButton ID="Common" runat="server" ImageUrl="~/Image/Login/Common.PNG" OnClick="Common_Click" CssClass="bordr" />
-                <div style="font-family:SimHei;white-space:pre;"> 管理员                    员工</div>
+                <div style="font-family:SimHei;white-space:pre;">       管理员            员工</div>
            </div>
                        <table style="width:100%" >
                                 <tr class="userid">
                                     <td class="auto-style1">
-                                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName">学号:</asp:Label>
+                                        <asp:Label ID="UserNameLabel" runat="server" AssociatedControlID="UserName"><img src="../Image/Login/userName.png" style="margin-top:4px;width:25px;height:25px;"/></asp:Label>
                                     </td>
                                     <td class="auto-style3">
-                                        <asp:TextBox ID="UserName" runat="server" style="margin-left: 7px;border:none;" Width="220px" Height="25px"></asp:TextBox>
+                                        <asp:TextBox ID="UserName" runat="server" style="margin-left: 7px;border:none; font-size:30px;" Width="220px" Height="34px"></asp:TextBox>
                                     </td>
                                     <td>    
                                         <asp:Label ID="lblUser" runat="server" Text="用户名不能为空"></asp:Label>
@@ -31,10 +31,10 @@
                                 </tr>
                                 <tr class="userid">
                                     <td class="auto-style1">
-                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password">密码:</asp:Label>
+                                        <asp:Label ID="PasswordLabel" runat="server" AssociatedControlID="Password"><img src="../Image/Login/password.png" style="margin-top:4px;width:25px;height:25px;" /></asp:Label>
                                     </td>
                                     <td class="auto-style3"  >
-                                        <asp:TextBox ID="Password" runat="server" TextMode="Password" style="margin-left: 7px;border:none;" Width="220px" Height="25px"></asp:TextBox>
+                                        <asp:TextBox ID="Password" runat="server" TextMode="Password" style="margin-left: 7px;border:none;font-size:30px;" Width="220px" Height="34px"></asp:TextBox>
                                     </td>
                                     <td>     
                                           <asp:Label ID="lblPwd" runat="server" Text="密码不能为空"></asp:Label>
@@ -53,7 +53,7 @@
                                 
                             </table>
                     <div class="login_top">
-                        <asp:ImageButton ID="btnLogin" runat="server" Height="30px" ImageUrl="~/Image/Login/SignIn-01.png" OnClick="btnLogin_Click" Width="280px" BorderStyle="None" />
+                        <asp:ImageButton ID="btnLogin" runat="server" Height="45px" ImageUrl="~/Image/Login/SignIn-01.png" OnClick="btnLogin_Click" Width="280px" BorderStyle="None" />
 &nbsp;</div>
             </div>
     </form>

@@ -1,20 +1,29 @@
 ﻿
 .tableContent {
-    width: 180px;
+   
     float: left;
     height:61px;
     line-height:60px;
     text-align: center;
-    color:#ffffff;
+    color:#f7ede0;
+    font-weight:500;
     margin: 0px auto;
     font-family:KaiTi;
     font-size:20px;
     border-bottom:solid 2px #000000;
     border-right:solid 2px #000000;
 }
+.fName{
+    text-align:center;
+    width:240px;
+}
+.jName{
+    width:140px;
+    text-align:center;
+}
 .tableHead
 {
-    width:182px;
+    
     float:left;
     text-align:center;
 }
@@ -23,7 +32,7 @@
     width:912px;
     line-height:0px;
     height:44px;
-    color:#ffffff;
+    color:#f7ede0;
     background-color:#000000;
     margin:20px auto;
     margin-bottom:0px;
@@ -45,7 +54,7 @@
     width :912px;
     height:35px;
     margin:2px auto;
-    color:#ffffff;
+    color:#f7ede0;
     background-color:#000000;
     font-family:KaiTi;
     font-size:18px;
