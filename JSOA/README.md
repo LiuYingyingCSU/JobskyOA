@@ -1,2 +1,0 @@
-# JobskyOA
-For Winter Mission

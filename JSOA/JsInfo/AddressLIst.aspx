@@ -26,7 +26,7 @@
                         <asp:Label ID="label12" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobName") %>' ></asp:Label>
                     </td>
                     <td style="width:200px;align-content:center">
-                        <asp:Label ID="label13" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobContact") %>'></asp:Label>
+                        <asp:Label ID="label13" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobPhone") %>'></asp:Label>
                     </td>
                 </tr>
             </table>
@@ -56,7 +56,7 @@
                             <asp:Label ID="label16" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobName") %>'></asp:Label>
                         </td>
                         <td style="width:200px">
-                            <asp:Label ID="label17" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobContact") %>'></asp:Label>
+                            <asp:Label ID="label17" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobPhone") %>'></asp:Label>
                         </td>
                     </tr>
                 </table>
@@ -86,7 +86,7 @@
                             <asp:Label ID="label20" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobName") %>'></asp:Label>
                         </td>
                         <td style="width:200px">
-                            <asp:Label ID="label21" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobContact") %>'></asp:Label>
+                            <asp:Label ID="label21" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobPhone") %>'></asp:Label>
                         </td>
                     </tr>
                 </table>
@@ -116,7 +116,7 @@
                             <asp:Label ID="label24" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobName") %>'></asp:Label>
                         </td>
                         <td style="width:200px">
-                            <asp:Label ID="label25" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobContact") %>'></asp:Label>
+                            <asp:Label ID="label25" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobPhone") %>'></asp:Label>
                         </td>
                     </tr>
                 </table>
@@ -146,7 +146,7 @@
                             <asp:Label ID="label28" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobName") %>'></asp:Label>
                         </td>
                         <td style="width:200px"> 
-                            <asp:Label ID="label29" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobContact") %>'></asp:Label>
+                            <asp:Label ID="label29" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobPhone") %>'></asp:Label>
                         </td>
                     </tr>
                 </table>

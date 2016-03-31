@@ -23,21 +23,6 @@ public partial class JsCommon_FileDownload : System.Web.UI.Page
             fileGroup = Request.QueryString["fileGroup"];
             //path = Request.QueryString["filePath"];
             //Response.Write(path);
-            switch(fileGroup)
-            {
-                case "程序组":
-                    this.Master.btnPro.ImageUrl = "~/Image/Button/Program-01.PNG"; 
-                    break;
-                case "美工组":
-                    this.Master.btnArt.ImageUrl = "~/Image/Button/Art-01.PNG";
-                    break;
-                case "网络组":
-                    this.Master.btnNet.ImageUrl = "~/Image/Button/Net-01.PNG";
-                    break;
-                case "办公室":
-                    this.Master.btnOff.ImageUrl = "~/Image/Button/Office-01.PNG";
-                    break;
-            }
         }
         //this.Master.btnPro.ImageUrl = "~/Image/Button/Program-01.PNG";
         if (!IsPostBack)

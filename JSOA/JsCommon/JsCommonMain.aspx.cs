@@ -8,18 +8,29 @@ using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
 using System.Data;
 
-
 public partial class JsCommon_JsCommonMain : System.Web.UI.Page
 {
+    public string imageUrl = "../Image/JsCommonMain/Business.jpg";
     protected void Page_Load(object sender, EventArgs e)
     {
+        DB db = new DB();
         rptBind();
         if(!IsPostBack)
         {
-            this.Master.btnMain.ImageUrl = "~/Image/Button/Main.PNG";
+            SqlDataReader dr0 = db.reDr("select jobImage from jobskyer where jobskyerID='" + Session["jobskyerID"] + "'");
+            dr0.Read();
+            if (dr0.HasRows)
+            {
+                imageUrl = "../Change/Picture/"+dr0["jobImage"].ToString();
+            }
+            else
+            {
+                imageUrl = "../Image/JsCommonMain/Business.jpg";
+            }
+            dr0.Close();
         }
         //判断用户是否已登录
-         DB db = new DB();
+         
          string jobName = HttpContext.Current.User.Identity.Name;
         if(HttpContext.Current.User.Identity.Name==""||HttpContext.Current.User.Identity.Name==null)
         {
@@ -31,7 +42,7 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             //用户已登录
             try
             {
-                SqlDataReader dr1 = db.reDr("select jobAcademy,jobPosition,jobCount from jobskyer where jobName='" + jobName + "'");
+                SqlDataReader dr1 = db.reDr("select jobAcademy,jobPosition from jobskyer where jobName='" + jobName + "'");
                 dr1.Read();
                 lblName.Text = HttpContext.Current.User.Identity.Name;
                 if (dr1.HasRows)
@@ -44,6 +55,7 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
                 {
                     Response.Write("找不到此用户！");
                 }
+                dr1.Dispose();
                 dr1.Close();
                 //dr2.Close();
                
@@ -58,20 +70,18 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             }
         }
 
-        string imgUrl;
-        //imgUrl=           默认头像
-        //jobskyerID = Session["jobskyerID"].ToString();
-        SqlDataReader dr2 = db.reDr("SELECT imageAddress FROM JOBSKYER WHERE jobName='" +jobName + "'");
-        dr2.Read();
-        imgUrl = dr2.GetValue(0).ToString().Trim();
-        ImgbtnProfile.ImageUrl = imgUrl;
-        dr2.Close();
+        //string imgUrl;
+        //SqlDataReader dr2 = db.reDr("SELECT jobImage FROM jobskyer WHERE jobName='" +jobName + "'");
+        //dr2.Read();
+        //imgUrl = "../Change/Picture/"+dr2.GetValue(0).ToString().Trim();
+        //dr2.Dispose();
+        //dr2.Close();
     }
 
     public string GetJobName(object jobskyerID)             //把jobskyerID转化为jobName输出
     {
         DB db = new DB();
-        SqlDataReader dr = db.reDr("SELECT jobName FROM JOBSKYER WHERE jobskyerID='" + jobskyerID + "'");
+        SqlDataReader dr = db.reDr("SELECT jobName FROM jobskyer WHERE jobskyerID='" + jobskyerID + "'");
         dr.Read();
         return dr.GetValue(0).ToString();
     }
@@ -81,7 +91,7 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
         //int n = 4 * (Convert.ToInt32(lbPage.Text) - 1);
         SqlConnection myCon = db.GetCon();
         myCon.Open();
-        string sqlstr = "SELECT TOP 3 jobskyerID,notTime,notTitle,notContent FROM NOTICE order by noticeID desc";
+        string sqlstr = "SELECT TOP 3 jobskyerID,notTime,notTitle,notContent FROM Notice order by noticeID desc";
         SqlCommand mycom = new SqlCommand(sqlstr, myCon);
         //mycom.Parameters.Add("n", n);
         SqlDataAdapter da = new SqlDataAdapter(mycom);
@@ -96,4 +106,5 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             this.Repeater1.DataBind();
         }
     }
+   
 }
