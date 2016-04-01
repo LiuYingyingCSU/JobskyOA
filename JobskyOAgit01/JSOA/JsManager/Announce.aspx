@@ -23,20 +23,20 @@
                                 
                                 <tr style="width:100%;height:20px">
                                     <h2>
-                                        <asp:Label ID="AnnouceTitle" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"notTitle" %>' CssClass="notTitle"></asp:Label>
+                                        <asp:Label ID="AnnouceTitle" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"notTitle")%>' CssClass="notTitle"></asp:Label>
                                     </h2>
                                 </tr>
                                 <tr style="width:100%;height:80px">
                                     <h3>
-                                        <asp:Label ID="AnnounceContent" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"notContent" %>' CssClass="notContent"></asp:Label>
+                                        <asp:Label ID="AnnounceContent" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"notContent") %>' CssClass="notContent"></asp:Label>
                                     </h3>
                                 </tr>
                                 <tr style="width:100%;height:15px">
                                     <h5>
-                                        <asp:Label ID="Announcer" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobskyerID" %>' CssClass="right-bottom"></asp:Label>
+                                        <asp:Label ID="Announcer" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobskyerID") %>' CssClass="right-bottom"></asp:Label>
                                     </h5>
                                     <h5>
-                                        <asp:Label ID="AnnounceTime" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"notTime" %>' CssClass="right-bottom"></asp:Label>
+                                        <asp:Label ID="AnnounceTime" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"notTime") %>' CssClass="right-bottom"></asp:Label>
                                     </h5>
                                 </tr>
                             </ItemTemplate>

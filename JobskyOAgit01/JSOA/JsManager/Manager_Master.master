@@ -24,9 +24,9 @@
             <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="退出登录" />
         </div> 
         <div class="top_bottom">
-            <a href="../JsCommon/JsCommonMain.aspx"><img src="../Image/Button/Main-01.png" id="main"/></a>
-            <a href="../JsManager/DutyRecord.aspx"><img src="../Image/Button/Sign-01.png" id="checksign" /></a>
-            <a href="#"><img src="../Image/Button/Activity-01.png" id="announce"/></a>
+            <a href="../JsCommon/JsManagerMain.aspx"><img src="../Image/Button/Main-01.png" id="main"/></a>
+            <a href="../JsManager/DutyRecordExcel.aspx"><img src="../Image/Button/Sign-01.png" id="checksign" /></a>
+            <a href="../JsManager/Announce.aspx"><img src="../Image/Button/Activity-01.png" id="announce"/></a>
         </div> 
        </div> 
     <div class="middle">
@@ -44,12 +44,18 @@
      <script type="text/javascript">
         function change() {
             var path = window.location.pathname;
-            if (/JsCommonMain/.test(path) == true) {
+            if (/JsManagerMain/.test(path) == true) {
                 document.getElementById("main").src = "../Image/Button/Main.png";
             }
-            else if (/DutyRecord/.test(path) == true) {
+            /*else if (/DutyRecord/.test(path) == true) {
                 document.getElementById("checksign").src = "../Image/Button/Sign.png";
-            }          
+            }*/
+            else if (/DutyRecordExcel/.test(path) == true) {
+                document.getElementById("checksign").src = "../Image/Button/Sign.png";
+            }
+            else if (/Announce/.test(path) == true) {
+                document.getElementById("announce").src = "../Image/Button/Activity.png";
+            }
         }
         change();
     </script>

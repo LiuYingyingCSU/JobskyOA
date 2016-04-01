@@ -7,20 +7,24 @@ using System.Web.UI.WebControls;
 using System.Data;
 using System.Data.SqlClient;
 
-public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
+public partial class JsManager_ManagerDutyTime : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-        ///姓名下拉列表绑定
-        ChooseNameBind();
-        ///每人的值班时间表数据绑定
-        TimeList_Bind();
+       
+       
+            ///姓名下拉列表绑定
+            ChooseNameBind();
+            ///每人的值班时间表数据绑定
+            TimeList_Bind();
+       
+       
     }
 
     protected void confirm_Click(object sender, EventArgs e)///首先判断该人员是否已经安排过值班
     {
         DB db = new DB();
-        string str = "SELECT jobskyerID FROM DUTY_TIME";
+        string str = "SELECT jobskyerID FROM dutyTimeTable";
         string jobskyerID = chooseName.SelectedValue;
         SqlConnection con = new SqlConnection();
         con = db.GetCon();
@@ -46,7 +50,7 @@ public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
     {
         string dutyInTime = chooseWeekday.SelectedValue + chooseSignInTime.SelectedValue;
         string dutyOutTime = chooseWeekday.SelectedValue + chooseSignOutTime.SelectedValue;
-        string InsertStr = "INSERT INTO DUTY_TIME(dutyInTime,dutyOutTime,jobskyerID)VALUES(@dutyInTime,@dutyOutTime,@jobskyerID)";
+        string InsertStr = "INSERT INTO dutyTimeTable(dutyInTime,dutyOutTime,jobskyerID)VALUES(@dutyInTime,@dutyOutTime,@jobskyerID)";
         DB db = new DB();
         SqlConnection con = new SqlConnection();
         con = db.GetCon();
@@ -77,7 +81,7 @@ public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
         DB db = new DB();
         string dutyInTime = chooseWeekday.SelectedValue + chooseSignInTime.SelectedValue;
         string dutyOutTime = chooseWeekday.SelectedValue + chooseSignOutTime.SelectedValue;
-        string str = "UPDATE DUTY_TIME SET dutyInTime=@dutyInTime,dutyOutTime=@dutyOutTime WHERE jobskyerID=@jobskyerID";
+        string str = "UPDATE dutyTimeTable SET dutyInTime=@dutyInTime,dutyOutTime=@dutyOutTime WHERE jobskyerID=@jobskyerID";
         SqlConnection con = new SqlConnection();
         con = db.GetCon();
         SqlCommand com = new SqlCommand(str, con);
@@ -134,7 +138,7 @@ public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
     public bool TimeList_Bind()
     {
         DB db = new DB();
-        string str = "SELECT jobName,dutyInTime,dutyOutTime FROM DUTY_TIME,JOBSKYER WHERE DUTY_TIME.jobskyerID=JOBSKYER.jobskyerID";
+        string str = "SELECT jobName,dutyInTime,dutyOutTime FROM dutyTimeTable,JOBSKYER WHERE dutyTimeTable.jobskyerID=JOBSKYER.jobskyerID";
         SqlConnection con = new SqlConnection();
         con = db.GetCon();
         con.Open();
@@ -164,7 +168,7 @@ public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
         if (e.CommandName == "delect")
         {
             string jobskyerID = Convert.ToString(e.CommandArgument);
-            string str = "DELETE FROM DUTY_TIME WHERE jobskyerID='" + jobskyerID + "'";
+            string str = "DELETE FROM dutyTimeTable WHERE jobskyerID='" + jobskyerID + "'";
             DB db = new DB();
             SqlConnection con = new SqlConnection();
             SqlCommand com = new SqlCommand(str, con);
@@ -183,7 +187,7 @@ public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
                 con.Close();
             }
             DB db1 = new DB();
-            string str1 = "SELECT jobName,dutyInTime,dutyOutTime FROM DUTY_TIME,JOBSKYER WHERE DUTY_TIME.jobskyerID=JOBSKYER.jobskyerID";
+            string str1 = "SELECT jobName,dutyInTime,dutyOutTime FROM dutyTimeTable,JOBSKYER WHERE dutyTimeTable.jobskyerID=JOBSKYER.jobskyerID";
             SqlConnection con1 = new SqlConnection();
             con1 = db.GetCon();
             con1.Open();
@@ -214,5 +218,9 @@ public partial class JsManager_TimeTable_Manager : System.Web.UI.Page
     protected void ToDutyTable_Click(object sender, EventArgs e)
     {
         Response.Redirect("~/JsInfo/DutyTable.aspx");
+    }
+    protected void chooseName_SelectedIndexChanged(object sender, EventArgs e)
+    {
+
     }
 }

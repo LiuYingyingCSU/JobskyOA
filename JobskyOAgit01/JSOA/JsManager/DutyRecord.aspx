@@ -85,7 +85,7 @@
     </div>
     <div>
         <asp:DropDownList ID="name_dropList" runat="server" OnSelectedIndexChanged="name_dropList_SelectedIndexChanged" >
-           <asp:ListItem>--请选择--</asp:ListItem>
+           
         </asp:DropDownList>
     </div>
     <div>

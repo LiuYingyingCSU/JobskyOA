@@ -12,11 +12,13 @@ public partial class JsManager_Announce : System.Web.UI.Page
 {
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        
+        Print();
+        
     }
     protected void Print()
     {
-        string a = "...";
+        //string a = "...";
         string str = "select noticeID,jobskyerID,jobName,notTitle,notContent,notTime from Notice,jobskyer where jobskyer.jobskyerID=Notice.jobskyerID orderby noticeID desc";
         DB db = new DB();
         SqlConnection con = new SqlConnection();

@@ -13,6 +13,21 @@
                 <h3>发布公告</h3>
             </div>
         </div>
+        <div>
+            <asp:Label ID="AnnounceTitleLabel" runat="server" Text="请输入标题："></asp:Label>
+            <asp:TextBox ID="AddAnnounceTitle" runat="server" OnTextChanged="AddAnnounceTitle_TextChanged"></asp:TextBox><br />
+            <asp:Label ID="AnnounceContentLabel" runat="server" Text="请输入内容："></asp:Label>
+            <br />
+            <div id="AddContent"> 
+                <table>
+                    <asp:TextBox ID="AddContentText" runat="server" TextMode="MultiLine" Width="800px" Height="330px" OnTextChanged="AddContentText_TextChanged"></asp:TextBox>
+                    
+                </table>
+                <div style="float:right">
+                   <asp:ImageButton ID="SubmitAnnounce" runat="server" ImageUrl="~/Image/Button/AnnounceWrite-02.png" OnClientClick="javascript:return confirm('确定添加？');" OnClick="SubmitAnnounce_Click" />
+                </div>
+            </div>
+        </div>
     </div>
 
 </asp:Content>
