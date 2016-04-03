@@ -32,12 +32,14 @@ public partial class Change_Change : System.Web.UI.Page
         string imgPath = Server.MapPath("../Change/Picture/") + strFileName;
         SqlConnection sqlCon = db.GetCon();
         sqlCon.Open();
-        SqlCommand sqlCom = new SqlCommand("chaPic", sqlCon);
-        sqlCom.CommandType = CommandType.StoredProcedure;
+        string sqlImg = "UPDATE jobskyer SET jobImage=@jobImage WHERE jobskyerID=@jobskyerID";
+        SqlCommand sqlCom = new SqlCommand(sqlImg, sqlCon);
         sqlCom.Parameters.Add("@jobImage", SqlDbType.NText, 0).Value = strFileName;
         sqlCom.Parameters.Add("@jobskyerID", SqlDbType.NChar, 0).Value=Session["jobskyerID"];
         isUpload = sqlCom.ExecuteNonQuery();
         sqlCon.Close();
+        //string sqlFU = "INSERT INTO files (fileName,jobskyerID,fileGroup,fileUpTime,filePath) values('" + strFileName + "','" + Session["jobskyerID"] + "','" + fileGroup.ToString() + "','" + nowTime.ToString() + "','" + strFileName + "')";
+        //isUpload = db.SqlEX(sqlFU);
         imageUp.SaveAs(imgPath);
     }
     public string getImage()
@@ -73,10 +75,8 @@ public partial class Change_Change : System.Web.UI.Page
             {
                 SqlConnection myCon = db.GetCon();
                 myCon.Open();
-                //string sqlpwd = "UPDATE jobskyer SET password=@password WHERE jobskyerID=@jobskyerID";
-                //SqlCommand myCom = new SqlCommand(sqlpwd,myCon);
-                SqlCommand myCom = new SqlCommand("chaPwd",myCon);
-                myCom.CommandType = CommandType.StoredProcedure;
+                string sqlpwd = "UPDATE jobskyer SET password=@password WHERE jobskyerID=@jobskyerID";
+                SqlCommand myCom = new SqlCommand(sqlpwd,myCon);
                 myCom.Parameters.Add("@password",SqlDbType.NChar,0).Value =newPwd;
                 myCom.Parameters.Add("@jobskyerID", SqlDbType.NChar, 0).Value=Session["jobskyerID"];
                 int isSubmit;

@@ -12,22 +12,17 @@
     height:100px;
     width:100%;
     margin-top:0px;
-    padding-bottom:0px;
+    padding-top:0px;
+   
     background-color:rgba(33, 34, 36, 0.53);
 }
-
 .top_bottom
 {
     width:60%;
     height:60px;
-    margin-top:44px;
+    margin-top:40px;
     margin-left:520px;
     position:absolute;
-}
-.top_bottom img{
-    display:block;
-    float:left;
-    margin-bottom:0;
 }
 .bar_bottom
 {
@@ -44,7 +39,7 @@
     left:50%;
     margin-top:40px;
     margin-left:-40%;
-    background-color:rgba(0, 0, 0, 0.60);
+    background-color:rgba(33, 34, 36, 0.81);
     border-radius:20px;
     position:absolute
 }
@@ -100,7 +95,7 @@ h6
 {
     width:900px;
     height:60px;
-    margin:30px auto 10px auto;
+    margin:5% auto 10px auto;
 }
 .FD_content
 {
