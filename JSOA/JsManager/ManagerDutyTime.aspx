@@ -1,8 +1,10 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JsInfo/JsInfo_Master.master" AutoEventWireup="true" CodeFile="ManagerDutyTime.aspx.cs" Inherits="JsManager_TimeTable_Manager" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JsManager/Manager_Master.master" AutoEventWireup="true" CodeFile="ManagerDutyTime.aspx.cs" Inherits="JsManager_ManagerDutyTime" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="JsInfo_ContentPlaceHolder" Runat="Server">
-    <div id="set_dutyTime">
-        <asp:DropDownList ID="chooseName" runat="server"></asp:DropDownList>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="Manager_ContentPlaceHolder" Runat="Server">
+     <div id="set_dutyTime">
+        <asp:DropDownList ID="chooseName" runat="server" OnSelectedIndexChanged="chooseName_SelectedIndexChanged"></asp:DropDownList>
         <asp:DropDownList ID="chooseWeekday" runat="server">
             <asp:ListItem Value="2016-02-01">周一</asp:ListItem>
             <asp:ListItem Value="2016-02-02">周二</asp:ListItem>
@@ -62,6 +64,5 @@
         </asp:Repeater>
     </div>
     <asp:Button ID="ToDutyTable" runat ="server" Text="值班表" OnClick="ToDutyTable_Click" />
-
 </asp:Content>
 

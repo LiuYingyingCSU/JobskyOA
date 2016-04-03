@@ -10,7 +10,7 @@
         <asp:ListItem Selected="True" Value ="0">请选择被代班人：</asp:ListItem>
      </asp:DropDownList>
             <br />
-        <asp:Label ID="lblMessage" runat="server" Text="提示信息" ForeColor="White"></asp:Label>
+        <asp:Label ID="lblMessage" runat="server" Text="提示信息"></asp:Label>
        </div>
         <div class="tableHeader">
             <p class="JobName">
@@ -62,8 +62,8 @@
                 &nbsp;<asp:LinkButton ID="lbtnLast" runat="server" onclick="lbtnLast_Click">尾页</asp:LinkButton> 
                 &nbsp;<asp:DropDownList ID="DropDownList1" runat="server" Width="80px">
                 </asp:DropDownList> 
-                <asp:LinkButton ID="lbtnGo" runat="server"  BackColor="Black"
-                BorderWidth="0px" BorderColor="Black" onclick="lbtnGo_Click" style="width: 20px" ForeColor="White">Go</asp:LinkButton>
+                <asp:LinkButton ID="lbtnGo" runat="server"  BackColor="LightBlue"
+                BorderWidth="0px" BorderColor="Blue" onclick="lbtnGo_Click" style="width: 20px">Go</asp:LinkButton>
                     </div>
             </div>
         </div>

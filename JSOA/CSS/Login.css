@@ -11,16 +11,15 @@
       width:30%;
       height:25%;
       font-family:SimHei;
-      margin-top:12%;
+      margin-top:15%;
       margin-left:70%;
 }
 .login_top
 {
       width:72%;
-      height:45px;
-      line-height:45px;
+      height:30px;
+      line-height:30px;
       font-size:20px;
-      margin-top:15px;
       border-radius:10px;
       text-align:center;
       background-color:white;
@@ -36,26 +35,17 @@
 {
      width: 15%;
      background-color:white;
-     height:35px;
-     
-     text-align:center;
-     display:inline-block;
-     margin-top:10px;
-     border-bottom-left-radius:10px;
-     border-top-left-radius:10px;
+     height:25px;
+     display:inline-block;border-radius:5px;
 }
  .bordr{
      display:inline-block;
-     margin-left:40px;
+     margin-left:100px;
  }
 .auto-style3 
 {
      width: 58%;
-     height:35px;
      background-color:white;
-     display:inline-block;
-     margin-top:10px;
-     border-bottom-right-radius:10px;
-     border-top-right-radius:10px;
+     display:inline-block;border-radius:10px;
      font-size:20px;
 }

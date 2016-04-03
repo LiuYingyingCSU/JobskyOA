@@ -86,7 +86,8 @@ public partial class JsCommon_Login : System.Web.UI.Page
                             }
                             else
                             {
-                                Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + "");
+                                //Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + "");
+                                Response.Redirect("~/JsCommon/Login.aspx");
                                 //lblFailText.Text = "请选择角色身份";
                                 //this.lblFailText.Visible = true;
                             }
@@ -96,12 +97,12 @@ public partial class JsCommon_Login : System.Web.UI.Page
                             if (role.ToString() == "1")
                             {
                                 //Response.Write("管理员");
-                                Response.Redirect("~/JsManager/DutyRecord.aspx?Name=" + jobName + "");  //跳转至管理人员界面
+                                Response.Redirect("~/JsManager/JsManagerMain.aspx?Name=" + jobName + "");  //跳转至管理人员界面
                             }
                             else if (role.ToString() == "0")
                             {
                                 //Response.Write("普通用户");
-                                Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + "");  //跳转至超级用户界面
+                                Response.Redirect("~/JsCommon/JsCommonMain.aspx?Name=" + jobName + "");  
                             }
                             else
                             {

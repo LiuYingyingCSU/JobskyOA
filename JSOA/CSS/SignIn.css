@@ -2,7 +2,7 @@
 {
     width:50%;
     height:60px;
-    margin:2% auto 2% auto;
+    margin:5% auto 2% auto;
 }
 .tableContent {
     width: 200px;
@@ -11,11 +11,9 @@
     line-height:50px;
     text-align: center;
     color:#e6dfdf;
-    margin: 0px auto;
+    margin: 7px auto;
     font-family:KaiTi;
     font-size:20px;
-    border-bottom:solid 2px #000000;
-    border-right:solid 2px #000000;
 }
 .tableJobName {
     width: 150px;
@@ -24,12 +22,9 @@
     line-height:50px;
     text-align: center;
     color:#e6dfdf;
-    margin: 0px auto;
+    margin: 7px auto;
     font-family:KaiTi;
     font-size:20px;
-    border-left:solid 2px #000000;
-    border-right:solid 2px #000000 ;
-    border-bottom:solid 2px #000000;
 }
 .tableHead
 {
@@ -56,20 +51,18 @@
     line-height:50px;
     text-align: center;
     color:#e6dfdf;
-    margin: 0px auto;
+    margin: 7px auto;
     font-family:KaiTi;
     font-size:20px;
-    border-bottom:solid 2px #000000;
-    border-right:solid 2px #000000;
 }
 .tableHeader
 {
-    width:915px;
+    width:900px;
     line-height:0px;
     height:50px;
     color:#e6dfdf;
     background-color:rgba(12, 12, 12, 0.60);
-    margin:10px auto;
+    margin:30px auto;
     margin-bottom:0px;
     border-top-left-radius:10px;
     border-top-right-radius:10px;
@@ -78,19 +71,17 @@
 }
 .tableBody
 {
-   width:915px;
+   width:900px;
     line-height:0px;
-    height:210px;
+    height:180px;
     margin:0 auto;
 }
 .bottom
 {
-    width :915px;
+    width :900px;
     height:30px;
-    line-height:30px;
     margin:80px auto;
     color:#e6dfdf;
-    font-family:KaiTi;
     background-color:rgba(12, 12, 12, 0.60);
     border-bottom-left-radius:10px;
     border-bottom-right-radius:10px;
