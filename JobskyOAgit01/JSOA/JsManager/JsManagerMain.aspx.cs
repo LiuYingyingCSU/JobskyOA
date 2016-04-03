@@ -8,14 +8,14 @@ using System.Data.SqlClient;
 using System.Web.UI.HtmlControls;
 using System.Data;
 
-public partial class JsCommon_JsCommonMain : System.Web.UI.Page
+public partial class JsManager_JsManagerMain : System.Web.UI.Page
 {
     public string imageUrl = "../Image/JsCommonMain/Business.jpg";
     protected void Page_Load(object sender, EventArgs e)
     {
         DB db = new DB();
         printAphorism();
-        if(!IsPostBack)
+        if (!IsPostBack)
         {
             SqlDataReader dr0 = db.reDr("select jobImage from jobskyer where jobskyerID='" + Session["jobskyerID"] + "'");
             dr0.Read();
@@ -30,9 +30,9 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
             dr0.Close();
         }
         //判断用户是否已登录
-         
+      
         string jobName = HttpContext.Current.User.Identity.Name;
-        if(HttpContext.Current.User.Identity.Name==""||HttpContext.Current.User.Identity.Name==null)
+        if (HttpContext.Current.User.Identity.Name == "" || HttpContext.Current.User.Identity.Name == null)
         {
             //用户未登录
             Response.Redirect("~/JsCommon/Login.aspx");
@@ -58,7 +58,7 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
                 dr1.Dispose();
                 dr1.Close();
                 //dr2.Close();
-                
+
             }
             catch
             {
@@ -69,17 +69,15 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
 
             }
         }
-
         //string imgUrl;
         ////imgUrl=           默认头像
         ////jobskyerID = Session["jobskyerID"].ToString();
-        //SqlDataReader dr2 = db.reDr("SELECT jobImage FROM jobskyer WHERE jobName='" +jobName + "'");
+        //SqlDataReader dr2 = db.reDr("SELECT jobImage FROM jobskyer WHERE jobName='" + jobName + "'");
         //dr2.Read();
         //imgUrl = dr2.GetValue(0).ToString().Trim();
         //dr2.Dispose();
         //dr2.Close();
     }
-
     public string GetJobName(object jobskyerID)             //把jobskyerID转化为jobName输出
     {
         DB db = new DB();
@@ -87,32 +85,6 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
         dr.Read();
         return dr.GetValue(0).ToString();
     }
-    //protected void rptBind()        //repeater数据绑定
-    //{
-    //    DB db = new DB();
-    //    //int n = 4 * (Convert.ToInt32(lbPage.Text) - 1);
-    //    SqlConnection myCon = db.GetCon();
-    //    myCon.Open();
-    //    string sqlstr = "SELECT TOP 3 jobskyerID,notTime,notTitle,notContent FROM Notice order by noticeID desc";
-    //    SqlCommand mycom = new SqlCommand(sqlstr, myCon);
-    //    //mycom.Parameters.Add("n", n);
-    //    SqlDataAdapter da = new SqlDataAdapter(mycom);
-    //    DataSet ds = new DataSet();
-    //    da.Fill(ds);
-    //    ds.Dispose();
-    //    da.Dispose();
-    //    myCon.Close();
-    //    if (ds != null)
-    //    {
-    //        this.Repeater1.DataSource = ds;
-    //        this.Repeater1.DataBind();
-    //    }
-    //}
-
-    //protected void JobAphorismRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
-    //{
-
-    //}
     public void printAphorism()
     {
         try
@@ -142,13 +114,14 @@ public partial class JsCommon_JsCommonMain : System.Web.UI.Page
         {
             Response.Write(ex.Message);
         }
-    }
-    protected void ImgbtnAphorism_Click(object sender, ImageClickEventArgs e)
-    {
-        Response.Redirect("JsCommonMainWrite.aspx");
+       
     }
     protected void JobAphorismRepeater_ItemCommand(object source, RepeaterCommandEventArgs e)
     {
 
+    }
+    protected void ImgbtnAphorism_Click(object sender, ImageClickEventArgs e)
+    {
+        Response.Redirect("JsManagerMainWrite.aspx");
     }
 }

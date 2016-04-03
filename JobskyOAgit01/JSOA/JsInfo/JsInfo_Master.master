@@ -1,10 +1,9 @@
-﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="JsInfo_Master.master.cs" Inherits="JsInfo_JsInfo_Master" %>
+﻿<%@ Master Language="C#" MasterPageFile="~/JsManager/Manager_Master.master" AutoEventWireup="true" CodeFile="JsInfo_Master.master.cs" Inherits="JsInfo_JsInfo_Master" %>
 
-<asp:Content ID="JsInfo_Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
-
-<asp:Content ID="JsInfo_Content2" ContentPlaceHolderID="Main_ContentPlaceHolder" Runat="Server">
-    <div style="margin-left:393px">
+<asp:Content ID="Content2" ContentPlaceHolderID="Manager_ContentPlaceHolder" Runat="Server">
+     <div style="margin-left:393px">
         <asp:ImageButton ID="DutyTable_ImgBtn" runat="server" />&nbsp;
         <asp:ImageButton ID="AddressList_ImgBtn" runat="server" />&nbsp;
         <asp:ImageButton ID="JsRule_ImgBtn" runat="server" />

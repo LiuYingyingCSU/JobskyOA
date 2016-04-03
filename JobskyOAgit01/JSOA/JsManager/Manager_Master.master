@@ -1,0 +1,63 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeFile="Manager_Master.master.cs" Inherits="JsManager_Manager_Master" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title></title>
+    <link href="../CSS/MasterPage.css" rel="stylesheet" type="text/css"/><!--直接拖CSS文件才会有提示；少了 type="text/css"-->
+    <asp:ContentPlaceHolder id="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body>
+    <form id="form1" runat="server">
+      <div class="bar_top">
+        <div style="width:115px;height:95px;background-image:url('../Image/Button/Logo.png');position:absolute;margin-top:-20px;margin-left:5px;">
+        </div>
+        <div style="color:white;">
+            <h3 style="margin-top:30px;margin-left:100px;position:absolute; width: 79px;">中南大学</h3>
+            <h4 style="margin-top:35px;margin-left:179px;position:absolute;"">毕业生就业指导服务中心</h4>
+            <h6 style="position:absolute;margin-top:60px;margin-left:30px;">THE STUDENT CAREER CENTER OF CENTRAL SOUTH UNIVERSITY</h6>
+        </div>
+        <div style="width:50px;margin-top:5px;float:right;margin-right:50px;">
+            <asp:Button ID="btnLogout" runat="server" OnClick="btnLogout_Click" Text="退出登录" />
+        </div> 
+        <div class="top_bottom">
+            <a href="../JsCommon/JsManagerMain.aspx"><img src="../Image/Button/Main-01.png" id="main"/></a>
+            <a href="../JsManager/DutyRecordExcel.aspx"><img src="../Image/Button/Sign-01.png" id="checksign" /></a>
+            <a href="../JsManager/Announce.aspx"><img src="../Image/Button/Activity-01.png" id="announce"/></a>
+        </div> 
+       </div> 
+    <div class="middle">
+        <asp:ContentPlaceHolder id="Manager_ContentPlaceHolder" runat="server">        
+        </asp:ContentPlaceHolder>
+    </div>
+     <div class="bar_bottom">
+        <div class="write">
+            <h6>Copy Right:2001-2016中南大学就业指导中心</h6>
+            <h6>技术支持：中南大学就业网技术团队</h6>
+            <h6>地址：湖南省长沙市岳麓区中南大学校本部二办公楼二层   网站电话：0731-88836669</h6>
+        </div>      
+      </div>
+    </form>
+     <script type="text/javascript">
+        function change() {
+            var path = window.location.pathname;
+            if (/JsManagerMain/.test(path) == true) {
+                document.getElementById("main").src = "../Image/Button/Main.png";
+            }
+            /*else if (/DutyRecord/.test(path) == true) {
+                document.getElementById("checksign").src = "../Image/Button/Sign.png";
+            }*/
+            else if (/DutyRecordExcel/.test(path) == true) {
+                document.getElementById("checksign").src = "../Image/Button/Sign.png";
+            }
+            else if (/Announce/.test(path) == true) {
+                document.getElementById("announce").src = "../Image/Button/Activity.png";
+            }
+        }
+        change();
+    </script>
+</body>
+</html>
