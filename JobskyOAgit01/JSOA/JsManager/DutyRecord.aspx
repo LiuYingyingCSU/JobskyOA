@@ -1,13 +1,11 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JsManager/Manager_Master.master" AutoEventWireup="true" CodeFile="DutyRecord.aspx.cs" Inherits="JsManager_DutyRecord" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/JsInfo/JsInfo_Master.master" AutoEventWireup="true" CodeFile="DutyRecord.aspx.cs" Inherits="JsManager_DutyRecord" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
-</asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="Manager_ContentPlaceHolder" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="JsInfo_ContentPlaceHolder" Runat="Server">
     <div id="DutyRecord">
         <table>
             <tr>
                 <td>
-        <asp:Repeater ID="DutyRecord_repeater" runat ="server" OnItemCommand="DutyRecord_repeater_ItemCommand">
+        <asp:Repeater ID="DutyRecord_repeater" runat ="server">
             <HeaderTemplate>
                 <table>
                     <tr>
@@ -15,7 +13,8 @@
                         <th style="width:200px">值班人</th>
                         <th style="width:200px">签到时间</th>
                         <th style="width:200px">签退时间</th>
-                    </tr>                
+                    </tr>
+                
             </HeaderTemplate>
             <ItemTemplate>
                 
@@ -32,19 +31,20 @@
                         <td style="width:200px">
                             <asp:Label ID="duty_out" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"MyDutyOutTime") %>'></asp:Label>
                         </td>
-                    </tr>             
+                    </tr>
+                
             </ItemTemplate>
             <FooterTemplate></table></FooterTemplate>
-            </asp:Repeater>
+        </asp:Repeater>
                     </td>
                 <td>
-                    <asp:Repeater ID="Duty_state" runat="server" OnItemCommand="Duty_state_ItemCommand">
+                    <asp:Repeater ID="Duty_state" runat="server">
                         <HeaderTemplate>
                             <table>
                                 <tr>
-                                    <th style="width:200px">签到状况</th>
-                                    <th style="width:200px">签退状况</th>
-                                </tr>                         
+                                    <th style="width:200px">值班状态</th>
+                                </tr>
+                           
                         </HeaderTemplate>
                         <ItemTemplate>
                             <tr>
@@ -56,10 +56,13 @@
                                 </td>
                             </tr>
                         </ItemTemplate>
-                        <FooterTemplate></table></FooterTemplate>
+                        <FooterTemplate>
+                            </table>
+                        </FooterTemplate>
                     </asp:Repeater>
-                </td>  
-                <asp:Repeater ID="Replace_Name" runat="server" OnItemCommand="Replace_Name_ItemCommand">
+                </td>
+                <td>
+                    <asp:Repeater ID="Replace_Name" runat="server" OnItemCommand="Replace_Name_ItemCommand">
                         <HeaderTemplate>
                             <table>
                                 <tr>
@@ -79,14 +82,13 @@
                         <FooterTemplate>
                             </table>
                         </FooterTemplate>
-                </asp:Repeater>                
+                    </asp:Repeater>
+                </td>
             </tr>
         </table>
     </div>
     <div>
-        <asp:DropDownList ID="name_dropList" runat="server" OnSelectedIndexChanged="name_dropList_SelectedIndexChanged" >
-           
-        </asp:DropDownList>
+        <asp:DropDownList ID="name_dropList" runat="server"></asp:DropDownList>
     </div>
     <div>
         <asp:Button ID="Search" runat="server" Text="检索" OnClick="Search_Click" />
@@ -95,9 +97,9 @@
     <div>
         <asp:Button ID="Delete" runat="server" Text="删除" OnClick="Delete_Click"/>
     </div>
-    <br />
+    <br /><br />
     <div>
-        <asp:Button ID="toDutyRecord" runat="server" Text="查看值班表" OnClick="toDutyRecord_Click" />&nbsp&nbsp
-        <asp:Button ID="toManagerDutyTime" runat="server" Text="设置值班表" OnClick="toManagerDutyTime_Click" />
-    </div>                                              
+        <asp:Button ID="toDutyRecord" runat="server" Text="查看值班表" OnClick="toDutyRecord_Click" />
+    </div>
 </asp:Content>
+

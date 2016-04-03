@@ -13,30 +13,24 @@
         <div class="JCM_info">组别：<asp:Label ID="lblPosition" runat="server" Text="Position"></asp:Label></div>
     </div>
     <div class="JCM_right">
-        <div style="width:100%;height:30px;margin-top:5px;position:relative;border-top-left-radius:10px; border-top-right-radius:10px;">
-            <div style="position:absolute; text-align:center;margin-left:200px;margin-top:10px;background-color:yellowgreen;color:black">
-                <h2>我喜欢的一句话*_*</h2>
-            </div>
-        </div>
+        <div style="color:#ffffff;font-family:KaiTi;">近日公告</div>
         <div class="notice">
-            <table>
-                <tr>
-                    <td>
-                        <asp:Repeater ID="AphorismRepeater" runat="server" OnItemCommand="JobAphorismRepeater_ItemCommand">
-                            <ItemTemplate>
-                                <tr style="width:100%;height:20px">
-                                    <h3>
-                                        <asp:Label ID="AphorismLabel" runat="server" Text='<%#DataBinder.Eval(Container.DataItem,"jobAphorism")%>'></asp:Label>
-                                    </h3>
-                                </tr>
-                            </ItemTemplate>
-                        </asp:Repeater>
-                    </td>
-                </tr>
-            </table>
-        </div>
-        <div style="float:right">
-            <asp:ImageButton ID="AphorismWrite" runat="server" ImageUrl="~/Image/Button/AnnounceWrite-01.png" OnClick="ImgbtnAphorism_Click" />
+            <asp:Repeater ID="Repeater1" runat="server">
+                <ItemTemplate>
+                    <p class="aboutNotice">
+                        <asp:Label ID="lblTime" runat="server" Text='<%#Eval("notTime")%>'></asp:Label>
+                    </p>
+                    <p class="aboutNotice">
+                        <asp:Label ID="lblTitle" runat="server" Text='<%# Eval("notTitle")%>'></asp:Label>
+                    </p>
+                    <p class="noticeDetail">
+                        <asp:Label ID="lblContent" runat="server" Text='<%#Eval("notContent")%>'></asp:Label>
+                    </p>
+                    <p class="aboutNotice">
+                        <asp:Label ID="lbljobName" runat="server" Text='<%#GetJobName(Eval("jobskyerID").ToString())%>' ></asp:Label>
+                    </p>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
         </div>
 </div>

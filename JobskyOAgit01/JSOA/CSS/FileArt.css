@@ -1,49 +1,64 @@
 ﻿
 .tableContent {
-    width: 20%;
+   
     float: left;
-    height:50px;
-    line-height:20px;
+    height:61px;
+    line-height:60px;
     text-align: center;
-    color:#e6dfdf;
-    margin: 7px auto;
+    color:#f7ede0;
+    font-weight:500;
+    margin: 0px auto;
     font-family:KaiTi;
     font-size:20px;
+    border-bottom:solid 2px rgba(0, 0, 0, 0.80);
+    border-right:solid 2px rgba(0, 0, 0, 0.80);
+}
+.fName{
+    text-align:center;
+    width:240px;
+}
+.jName{
+    width:140px;
+    text-align:center;
 }
 .tableHead
 {
-    width:20%;
+    
     float:left;
     text-align:center;
 }
 .tableHeader
 {
-    width:900px;
+    width:912px;
     line-height:0px;
-    height:50px;
-    color:rgba(12, 12, 12, 0.90);
-    background-color:#8bcc7c;
+    height:44px;
+    color:#f7ede0;
+    background-color:rgba(0, 0, 0, 0.80);
     margin:20px auto;
     margin-bottom:0px;
     border-top-left-radius:10px;
     border-top-right-radius:10px;
     font-family:KaiTi;
-    font-size:25px;
+    font-size:20px;
 }
 .tableBody
 {
-   width:900px;
+   width:912px;
     line-height:0px;
-    height:180px;
+    height:250px;
     margin:0 auto;
+    border-left:solid 2px rgba(0, 0, 0, 0.80);
 }
 .bottom
 {
-    width :900px;
-    height:30px;
-    margin:80px auto;
-    color:#e6dfdf;
-    background-color:rgba(12, 12, 12, 0.60);
+    width :912px;
+    height:35px;
+    margin:2px auto;
+    color:#f7ede0;
+    background-color:rgba(0, 0, 0, 0.80);
+    font-family:KaiTi;
+    font-size:18px;
+    line-height:28px;
     border-bottom-left-radius:10px;
     border-bottom-right-radius:10px;
 }

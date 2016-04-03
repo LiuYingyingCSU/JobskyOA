@@ -81,6 +81,9 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         myCon.Open();
         myCom = new SqlCommand("select count(*) from files WHERE fileGroup='"+fileGroup+"'",myCon); //获得该组文件的总个数
         this.lbCount.Text = (Convert.ToInt32(myCom.ExecuteScalar()) / 4).ToString();  //算出总页数为DropdownList赋值
+        myCom.Dispose();
+        myCon.Dispose();
+        myCon.Close();
         int[] num = new int[Convert.ToInt32(lbCount.Text)];
         for(int i=1;i<=Convert.ToInt32(lbCount.Text);i++)
         {
@@ -88,9 +91,7 @@ public partial class JsCommon_fileRepeater : System.Web.UI.UserControl
         }
         DropDownList1.DataSource = num;
         DropDownList1.DataBind();
-        myCom.Dispose();
-        myCon.Dispose();
-        myCon.Close();
+        
     }
     protected void rptBind()
     {
