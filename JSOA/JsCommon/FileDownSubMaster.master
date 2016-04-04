@@ -1,0 +1,39 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/MasterPage.master" AutoEventWireup="true" CodeFile="FileDownSubMaster.master.cs" Inherits="JsCommon_FileDownSubMaster" %>
+<%@ Register TagName="fileRepeater" TagPrefix="uc1"  Src="~/JsCommon/fileRepeater.ascx"%>
+<%@ MasterType VirtualPath="~/MasterPage.master" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+</asp:Content>
+<asp:Content ID="SubContent" ContentPlaceHolderID="Main_ContentPlaceHolder" runat="server">
+    <div class="FD_head">
+        <a href="../JsCommon/FileProgram.aspx?fileGroup=程序组&filePath=/File/Program/"><img src="../Image/Button/Program.png" id="program"/></a>
+        <a href="../JsCommon/FileProgram.aspx?fileGroup=美工组&filePath=/File/Art/"><img src="../Image/Button/Art.png" id="art" /></a>
+        <a href="../JsCommon/FileProgram.aspx?fileGroup=网络组&filePath=/File/Net/"><img src="../Image/Button/Net.png" id="net"/></a>
+        <a href="../JsCommon/FileProgram.aspx?fileGroup=办公室&filePath=/File/Office/"><img src="../Image/Button/Office.png" id="office" /></a>
+    </div>
+    <script type="text/javascript">
+        function cha() {
+            document.getElementById("art").src = "../Image/Button/Art-01.png";
+        }
+        function change() {
+            var path = window.location.href;
+            if (/Art/.test(path) == true) {
+                document.getElementById("art").src = "../Image/Button/Art-01.png";
+            }
+            else if (/Net/.test(path) == true) {
+                document.getElementById("net").src = "../Image/Button/Net-01.png";
+            }
+            else if (/Office/.test(path) == true) {
+                document.getElementById("office").src = "../Image/Button/Office-01.png";
+            }
+            else if (/Program/.test(path) == true) {
+                document.getElementById("program").src = "../Image/Button/Program-01.png";
+            }
+        }
+        change();
+    </script>
+    <div class="FD_content">
+    <asp:ContentPlaceHolder ID="SubContent_ContentPlaceHolder" runat="server">
+        <uc1:fileRepeater ID="fileRpt" runat="server" />
+    </asp:ContentPlaceHolder>
+    </div>
+</asp:Content>
